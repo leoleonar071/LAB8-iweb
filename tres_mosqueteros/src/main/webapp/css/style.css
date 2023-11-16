@@ -32,7 +32,8 @@ p {
 header {
     width: 100%;
     height: 5rem;
-    background-color: #04011E;
+    padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
+    background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;
     display: flex;
     align-items: center !important;
     justify-content: space-between !important;
@@ -325,6 +326,18 @@ input:valid ~ label {
     text-decoration: underline;
 }
 /* Login Styles END */
+
+.footer {
+    padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
+    background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;
+    padding: 1em 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
 
 
 

@@ -30,7 +30,11 @@
 
 <body>
 <header>
-    <div class="logo"><a href="<%=request.getContextPath()%>/admin_gen"><img class="logo-img" src='images/logo_topbar.png' alt="logo"></a></div>
+    <div class="logo" style="margin-left: 30px; margin-top: 30px">
+        <a href="#">
+            <img class="logo-img" src='images/logo0.png' alt="logo" style="width: 130px; height: auto;">
+        </a>
+    </div>
 
     <div class="bars">
         <div class="line"></div>
@@ -41,35 +45,36 @@
     <nav class="nav-bar">
         <ul>
             <li>
-                <a href="#" class="active">Gestión de Personas</a>
+                <a href="#" style="color: #000000; font-weight: bold;" class="active">Gestión de Personas</a>
+            </li>
+
+            <li>
+                <a href="#" style="color:#000000; font-weight: bold;">Gestión de Recursos</a>
             </li>
             <li>
-                <a href="#">Gestión de Recursos</a>
+                <a href="#" style="color:#000000; font-weight: bold;">Estadísticas</a>
             </li>
             <li>
-                <a href="#">Estadísticas</a>
+                <a href="#" style="color:#000000; font-weight: bold;">Donaciones</a>
             </li>
             <li>
-                <a href="#">Donaciones</a>
+                <a href="#" style="color:#000000; font-weight: bold;">Jugador</a>
             </li>
             <li>
-                <a href="#"><i class="fa-solid fa-door-open nav-icon2"></i>Cerrar Sesión</a>
+                <a href="#" style="color:#000000; font-weight: bold;"><i class="fa-solid fa-door-open nav-icon2"></i>Cerrar Sesión</a>
             </li>
         </ul>
     </nav>
 </header>
 
 
-    <div class="container-fluid" style="padding-left:0 !important; padding-right: 0 !important; background: rgb(45,0,83) !important;
-    background: radial-gradient(circle, rgba(45,0,83,1) 0%, rgba(35,3,80,1) 59%, rgba(21,0,48,1) 100%) !important;">
-        <div class="text-secondary px-4 py-5 text-center">
-            <div class="py-5">
-                <h1 class="display-5 fw-bold text-white">Bienvenido, @Admin_general</h1>
-                <div style="margin-bottom: 20px"></div>
-                <h3 class="fw-bold text-white">Panel de Administración de Usuarios</h3>
-                <div style="margin-bottom: 20px"></div>
-                <div class="justify-content-sm-center">
-                </div>
+<div class="container-fluid" style="padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
+    background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;">
+<div class="text-secondary px-4 py-5 text-center">
+            <div style="padding-bottom: 30px; padding-top: 30px">
+                <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: @...</h1>
+                <div style="margin-bottom: 10px"></div>
+                <h3 class="fw-bold text-black" style="color: #292826">Panel de Gestión de Personas</h3>
             </div>
         </div>
     </div>
@@ -158,6 +163,10 @@
 
                 <td class="cell c6 lastcol" style=""></td>
             </tr>
+
+
+
+
         </tbody>
 
     </table>
@@ -188,8 +197,8 @@
 
 
 
-<footer style="background-color: yellow; padding: 20px; text-align: center; margin-top: 0;">
-    <p>Derechos Reservados &copy; 2023 - Nombre de tu Empresa o Institución</p>
+<footer class="footer">
+    <p style="color: black">Derechos Reservados &copy; 2023</p>
 </footer>
 
 
