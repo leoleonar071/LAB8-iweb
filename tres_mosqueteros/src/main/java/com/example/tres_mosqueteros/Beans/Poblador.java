@@ -92,6 +92,16 @@ public class Poblador {
     private int tiempo_en_colonia;
     private int fuerza;
 
+    public int getIdJugador() {
+        return idJugador;
+    }
+
+    public void setIdJugador(int idJugador) {
+        this.idJugador = idJugador;
+    }
+
+    private int idJugador;
+
 
 
 }
