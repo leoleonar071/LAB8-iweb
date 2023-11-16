@@ -52,13 +52,10 @@
                 <a href="#" style="color:#000000; font-weight: bold;">Gestión de Recursos</a>
             </li>
             <li>
-                <a href="#" style="color:#000000; font-weight: bold;">Estadísticas</a>
+                <a href="#" style="color:#000000; font-weight: bold;">Guerra</a>
             </li>
             <li>
-                <a href="#" style="color:#000000; font-weight: bold;">Donaciones</a>
-            </li>
-            <li>
-                <a href="#" style="color:#000000; font-weight: bold;">Jugador</a>
+                <a href="#" style="color:#000000; font-weight: bold;">Leaderboard</a>
             </li>
             <li>
                 <a href="#" style="color:#000000; font-weight: bold;"><i class="fa-solid fa-door-open nav-icon2"></i>Cerrar Sesión</a>
@@ -71,7 +68,7 @@
 <div class="container-fluid" style="padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
     background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;">
 <div class="text-secondary px-4 py-5 text-center">
-            <div style="padding-bottom: 30px; padding-top: 30px">
+            <div style="padding-bottom: 25px; padding-top: 30px">
                 <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: @...</h1>
                 <div style="margin-bottom: 10px"></div>
                 <h3 class="fw-bold text-black" style="color: #292826">Panel de Gestión de Personas</h3>
@@ -174,31 +171,34 @@
 
 
 
-            <div class="container">
-                <nav class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        <!---->
-                        <li class="page-item">
-                            <a href="#" class="page-link">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="#" aria-label="Next" class="page-link">
-                                <span aria-hidden="true">»</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+<div class="container">
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
 
+            <li class="page-item">
+                <a href="#" class="page-link">1</a>
+            </li>
 
-<div style="margin-bottom: 50px"></div>
+            <li class="page-item">
+                <a href="#" class="page-link">2</a>
+            </li>
+
+            <li class="page-item">
+                <a href="#" aria-label="Next" class="page-link">
+                    <span aria-hidden="true">»</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
 
 
 
 
 <footer class="footer">
-    <p style="color: black">Derechos Reservados &copy; 2023</p>
+    <p style="color: black; font-weight: bold;">Derechos Reservados &copy; 2023</p>
 </footer>
 
 
