@@ -1,4 +1,4 @@
-package com.example.tres_mosqueteros;
+package com.example.tres_mosqueteros.Servlets;
 
 import java.io.*;
 
