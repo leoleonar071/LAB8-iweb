@@ -18,17 +18,20 @@ public class PobladorDao extends DaoBase{
 
             while (rs.next()) {
                 Poblador poblador = new Poblador();
-                poblador.setIdPobladores(rs.getInt(1));
-                poblador.setProfesion(rs.getString(2));
-                poblador.setAlimentacionxdia(rs.getInt(3));
-                poblador.setProduccion_moral(rs.getInt(4));
-                poblador.setNombre(rs.getString(5));
-                poblador.setGenero(rs.getString(6));
-                poblador.setMoral(rs.getInt(7));
+                poblador.setIdPoblador(rs.getInt(1));
+                poblador.setNombre(rs.getString(3));
+                poblador.setIdGenero(rs.getString(4));
+
+                poblador.setIdProfesion(rs.getString(5));
+                poblador.setAlimentacionXdia(rs.getInt(6));
+
+
+                poblador.setMoral(rs.getInt(10));
                 poblador.setTiempo_en_colonia(rs.getInt(8));
                 poblador.setFuerza(rs.getInt(9));
-                poblador.setIdJugador(rs.getInt(10));
+                poblador.setProduccion_moral(rs.getInt(7));
                 poblador.setProduccion_alimento(rs.getInt(11));
+
 
 
                 listaPobladores.add(poblador);

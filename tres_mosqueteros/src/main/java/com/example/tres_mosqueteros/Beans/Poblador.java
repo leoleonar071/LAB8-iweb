@@ -1,44 +1,21 @@
 package com.example.tres_mosqueteros.Beans;
 
 public class Poblador {
-    public int getIdPobladores() {
-        return idPobladores;
+
+    public int getIdPoblador() {
+        return idPoblador;
     }
 
-    public void setIdPobladores(int idPobladores) {
-        this.idPobladores = idPobladores;
+    public void setIdPoblador(int idPoblador) {
+        this.idPoblador = idPoblador;
     }
 
-    public String getProfesion() {
-        return profesion;
+    public int getIdJugador() {
+        return idJugador;
     }
 
-    public void setProfesion(String profesion) {
-        this.profesion = profesion;
-    }
-
-    public int getAlimentacionxdia() {
-        return alimentacionxdia;
-    }
-
-    public void setAlimentacionxdia(int alimentacionxdia) {
-        this.alimentacionxdia = alimentacionxdia;
-    }
-
-    public int getProduccion_alimento() {
-        return produccion_alimento;
-    }
-
-    public void setProduccion_alimento(int produccion_alimento) {
-        this.produccion_alimento = produccion_alimento;
-    }
-
-    public int getProduccion_moral() {
-        return produccion_moral;
-    }
-
-    public void setProduccion_moral(int produccion_moral) {
-        this.produccion_moral = produccion_moral;
+    public void setIdJugador(int idJugador) {
+        this.idJugador = idJugador;
     }
 
     public String getNombre() {
@@ -49,20 +26,36 @@ public class Poblador {
         this.nombre = nombre;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getIdGenero() {
+        return idGenero;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setIdGenero(String idGenero) {
+        this.idGenero = idGenero;
     }
 
-    public int getMoral() {
-        return moral;
+    public String getIdProfesion() {
+        return idProfesion;
     }
 
-    public void setMoral(int moral) {
-        this.moral = moral;
+    public void setIdProfesion(String idProfesion) {
+        this.idProfesion = idProfesion;
+    }
+
+    public int getAlimentacionXdia() {
+        return alimentacionXdia;
+    }
+
+    public void setAlimentacionXdia(int alimentacionXdia) {
+        this.alimentacionXdia = alimentacionXdia;
+    }
+
+    public int getProduccion_moral() {
+        return produccion_moral;
+    }
+
+    public void setProduccion_moral(int produccion_moral) {
+        this.produccion_moral = produccion_moral;
     }
 
     public int getTiempo_en_colonia() {
@@ -81,27 +74,36 @@ public class Poblador {
         this.fuerza = fuerza;
     }
 
-    private int idPobladores;
-    private String profesion;
-    private int alimentacionxdia;
-    private int produccion_alimento;
-    private int produccion_moral;
+    public int getMoral() {
+        return moral;
+    }
+
+    public void setMoral(int moral) {
+        this.moral = moral;
+    }
+
+
+
+    public int getProduccion_alimento() {
+        return produccion_alimento;
+    }
+
+    public void setProduccion_alimento(int produccion_alimento) {
+        this.produccion_alimento = produccion_alimento;
+    }
+
+    private int idPoblador;
+    private int idJugador;
     private String nombre;
-    private String genero;
-    private int moral;
+    private String idGenero;
+    private String idProfesion;
+    private int alimentacionXdia;
+    private int produccion_moral;
     private int tiempo_en_colonia;
     private int fuerza;
+    private int moral;
 
-    public int getIdJugador() {
-        return idJugador;
-    }
-
-    public void setIdJugador(int idJugador) {
-        this.idJugador = idJugador;
-    }
-
-    private int idJugador;
-
+    private int produccion_alimento;
 
 
 }

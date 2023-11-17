@@ -5,6 +5,16 @@ public class Jugador {
     private String nombre;
     private String edad;
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    private boolean estado;
+
     public int getIdJugador() {
         return idJugador;
     }
@@ -45,12 +55,12 @@ public class Jugador {
         this.paz = paz;
     }
 
-    public String getPass_hashed() {
-        return pass_hashed;
+    public String getPassword_hashed() {
+        return password_hashed;
     }
 
-    public void setPass_hashed(String pass_hashed) {
-        this.pass_hashed = pass_hashed;
+    public void setPassword_hashed(String password_hashed) {
+        this.password_hashed = password_hashed;
     }
 
     public String getEmail() {
@@ -61,22 +71,22 @@ public class Jugador {
         this.email = email;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPass(String password) {
+        this.password = password;
     }
 
     private String usuario;
     private boolean paz;
     // en el esquema esta con tipo tynint, que admite 0 o 1 , solamente se hace un cambio a bollean y ya
 
-    private String pass_hashed;
+    private String password_hashed;
     // contraseña con hash
     private String email;
-    private String pass;
+    private String password;
     // contraña sin hash
 
 }
