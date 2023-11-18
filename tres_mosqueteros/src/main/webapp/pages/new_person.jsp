@@ -130,8 +130,8 @@
 
                             <div>
                                 <div class="form-group" style="padding-right: 1rem">
-                                    <label  style="text-align: left;"><strong>Título del evento:</strong></label>
-                                    <input name="titulo" type="text" class="form-control"  required>
+                                    <label  style="text-align: left;"><strong>Nombre de la persona:</strong></label>
+                                    <input name="titulo" pattern=".{" type="text" class="form-control"  required>
                                 </div>
                             </div>
 
@@ -251,9 +251,9 @@
 <div style="margin-bottom: 50px"></div>
 
 
-<footer-form class="footer">
+<footer class="footer-form">
     <p style="color: black; font-weight: bold;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
-</footer-form>
+</footer>
 
 
 
