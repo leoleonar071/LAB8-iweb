@@ -58,6 +58,10 @@ public class MenuServlet extends HttpServlet {
                     case "GRA":
                         Persona persona = new Granjero();
                         Granjero g = (Granjero) persona;
+                        persona.setNombre(nombre);
+                        persona.setIdGenero(idGenero);
+                        persona.setIdProfesion(idOficio);
+                        persona.setTiempo_en_colonia(0);
                         ((Granjero) persona).setAlimentacionxdia();
                         ((Granjero) persona).setMoral();
                         ((Granjero) persona).setFuerza();

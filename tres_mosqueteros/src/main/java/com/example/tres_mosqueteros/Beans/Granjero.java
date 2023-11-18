@@ -10,13 +10,8 @@ public class Granjero extends Persona {
     Random random = new Random();
 
 
-    @Override
-    public void setAlimentacionXdia(int alimentacionXdia) {
-        super.setAlimentacionXdia(alimentacionXdia);
-    }
-
     public int getProduccionAlimento(){return produccionAlimento;}
-    
+
     public void setProduccionAlimento(){this.produccionAlimento = random.nextInt(101) + 100;}
 
 

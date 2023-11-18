@@ -50,6 +50,11 @@ public class PersonaDao extends DaoBase{
             pstmt.setString(3, persona.getIdGenero());
             pstmt.setString(4, persona.getIdProfesion());
             pstmt.setInt(5,((Granjero) persona).getAlimentacionxdia());
+            pstmt.setInt(6,((Granjero) persona).getProduccionMoral());
+            pstmt.setInt(7,((Granjero) persona).getMoral());
+            pstmt.setInt(8,((Granjero) persona).getAlimentacionxdia());
+            pstmt.setInt(9,((Granjero) persona).getAlimentacionxdia());
+
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
