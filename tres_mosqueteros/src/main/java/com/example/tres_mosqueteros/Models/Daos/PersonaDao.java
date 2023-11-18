@@ -1,5 +1,6 @@
 package com.example.tres_mosqueteros.Models.Daos;
 
+import com.example.tres_mosqueteros.Beans.Granjero;
 import com.example.tres_mosqueteros.Beans.Persona;
 
 import java.sql.*;
@@ -44,8 +45,11 @@ public class PersonaDao extends DaoBase{
         try(Connection conn = this.getConection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-           // pstmt.setString(1,nuevoEstado);
-            //pstmt.setString(2, idUsuario);
+            pstmt.setInt(1,persona.getIdJugador());
+            pstmt.setString(2, persona.getNombre());
+            pstmt.setString(3, persona.getIdGenero());
+            pstmt.setString(4, persona.getIdProfesion());
+            pstmt.setInt(5,((Granjero) persona).getAlimentacionxdia());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

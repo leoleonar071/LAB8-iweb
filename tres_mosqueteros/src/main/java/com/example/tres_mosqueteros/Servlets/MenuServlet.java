@@ -43,7 +43,7 @@ public class MenuServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        PersonaDao personaDao = new PersonaDao();
         String action = request.getParameter("action") == null? "newPerson" : request.getParameter("action");
 
 
@@ -66,8 +66,10 @@ public class MenuServlet extends HttpServlet {
 
                         System.out.println("alimentacion x dia: "+ ((Granjero) persona).getAlimentacionxdia());
                         System.out.println("moral: "+((Granjero) persona).getAlimentacionxdia());
-                        System.out.println("fuerza:" + ((Granjero) persona).getProduccionAlimento());
-                        
+                        System.out.println("fuerza:" + ((Granjero) persona).getFuerza());
+                        System.out.println("produccion alimento:" + ((Granjero) persona).getProduccionAlimento());
+                        System.out.println("produccion moral:" + ((Granjero) persona).getProduccionMoral());
+                        personaDao.crearPersona(persona);
                         break;
 
 
