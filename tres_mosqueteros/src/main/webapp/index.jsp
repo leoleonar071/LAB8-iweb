@@ -23,6 +23,10 @@
         <div class="login-form">
             <form method="POST" action="<%=request.getContextPath()%>/login?action=login">
                 <h2>Iniciar Sesión</h2>
+                <% if (request.getAttribute("err") != null) {%>
+                <div class="alert alert-danger" role="alert"><%=request.getAttribute("err")%>
+                </div>
+                <% } %>
                 <div class="login-input">
                     <i class="fa-solid fa-envelope"></i>
                     <input type="text" id="user" name="user" required>
