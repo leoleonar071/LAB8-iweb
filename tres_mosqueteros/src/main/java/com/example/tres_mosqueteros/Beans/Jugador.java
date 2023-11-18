@@ -1,4 +1,5 @@
 package com.example.tres_mosqueteros.Beans;
+import java.util.Random;
 
 public class Jugador {
     private int idJugador;
@@ -8,6 +9,8 @@ public class Jugador {
     private String usuario;
     private String email;
     private int estado;
+
+
 
     public int getIdJugador() {
         return idJugador;

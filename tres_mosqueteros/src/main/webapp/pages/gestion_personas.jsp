@@ -1,6 +1,9 @@
-
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.tres_mosqueteros.Beans.Jugador" %>
+<%@ page import="com.example.tres_mosqueteros.Beans.Persona" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<% ArrayList<Persona> listaPersonas = (ArrayList<Persona>) request.getAttribute("listaPersonas"); %>
 
 
 <!doctype html>
@@ -70,10 +73,10 @@
 
 <div class="container-fluid" style="padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
     background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;">
-<div class="text-secondary px-4 py-5 text-center">
-            <div style="padding-bottom: 25px; padding-top: 30px">
-                <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: @...</h1>
-                <div style="margin-bottom: 10px"></div>
+<div class="text-secondary px-4 py-2 text-center">
+            <div style="padding-bottom: 20px; padding-top: 30px">
+                <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: <%=jugadorLogueado.getNombre()%></h1>
+                <div style="margin-bottom: 5px"></div>
                 <h3 class="fw-bold text-black" style="color: #292826">Panel de Gestión de Personas</h3>
             </div>
         </div>
@@ -137,14 +140,17 @@
 <div style="padding-top: 25px;"></div>
 
 <div class="table-responsive container">
-    <table class="admintable generaltable table-sm" id="users">
+    <table class="table" >
         <thead>
             <tr>
-                <th class="header c0 centeralign" style="" scope="col"><a><strong>NOMBRE</strong></a> / <a><strong>APELLIDO</strong></a></th>
-                <th class="header c1 centeralign" style="" scope="col"><a><strong>CÓDIGO</strong></a></th>
-                <th class="header c2" style="" scope="col"><a><strong>ROL EN EL SISTEMA</strong></a></th>
-                <th class="header c2" style="" scope="col"><a><strong>ROL ACADÉMICO</strong></a></th>
-                <th class="header c3" style="" scope="col"><a><strong>ESTADO</strong></a></th>
+                <th class="header c0 centeralign" style="" scope="col"><a><strong>ID</strong></a></th>
+                <th class="header c0 centeralign" style="" scope="col"><a><strong>NOMBRE</strong></a></th>
+                <th class="header c1 centeralign" style="" scope="col"><a><strong>GÉNERO</strong></a></th>
+                <th class="header c2" style="" scope="col"><a><strong>CONSUMO ALIMENTO</strong></a></th>
+                <th class="header c2" style="" scope="col"><a><strong>MORAL</strong></a></th>
+                <th class="header c3" style="" scope="col"><a><strong>TIEMPO EN COLONIA</strong></a></th>
+                <th class="header c5" style="" scope="col">FUERZA</th>
+                <th class="header c5" style="" scope="col">PRODUCCION</th>
                 <th class="header c5" style="" scope="col">EDITAR</th>
                 <td class="header c6 lastcol" style=""></td>
             </tr>
@@ -153,48 +159,32 @@
 
 
         <tbody>
-            <tr class="">
-                <td class="centeralign cell c0" style=""><a>Juan Perez</a></td>
-                <td class="centeralign cell c1" style="">123123123321</td>
-                <td class="cell c2" style="">asdasd</td>
-                <td class="cell c2" style="">sdfsdf</td>
-                <td class="cell c3" style="">sdfsdf</td>
-                <td class="cell c5" style=""><a href="<%=request.getContextPath()%>/admin_gen?action=editar"><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/edit-row.png" alt="edit-row"/></a></td>
 
-                <td class="cell c6 lastcol" style=""></td>
+        <% for (Persona persona : listaPersonas){%>
+            <tr>
+                <td><a><%=persona.getIdPoblador()%></a></td>
+                <td><%=persona.getNombre()%></td>
+                <td><%=persona.getGenero()%></td>
+                <td><%=persona.getAlimentacionXdia()%></td>
+                <td><%=persona.getMoral()%></td>
+                <td><a><%=persona.getTiempo_en_colonia()%></a></td>
+                <td><%=persona.getFuerza()%></td>
+                <td><%=persona.getProduccionAlimento()%></td>
+                <td><a href="<%=request.getContextPath()%>/admin_gen?action=editar"><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/edit-row.png" alt="edit-row"/></a></td>
+
             </tr>
-
+        <%}%>
 
 
 
         </tbody>
 
     </table>
-</div>
 
 
-
-<div class="container">
-    <nav class="mt-4">
-        <ul class="pagination justify-content-center">
-
-            <li class="page-item">
-                <a href="#" class="page-link">1</a>
-            </li>
-
-            <li class="page-item">
-                <a href="#" class="page-link">2</a>
-            </li>
-
-            <li class="page-item">
-                <a href="#" aria-label="Next" class="page-link">
-                    <span aria-hidden="true">»</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-
-        </ul>
-    </nav>
+    <div>
+        <a class="btn btn-primary" style="margin-left: 2px;" href="<%=request.getContextPath()%>/menu?action=crearPersona">Crear Persona</a>
+    </div>
 </div>
 
 
