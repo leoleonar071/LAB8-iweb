@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("credenciales invalidas");
             request.setAttribute("err","Usuario o password incorrectos");
             request.getRequestDispatcher("index.jsp").forward(request, response);
+
         }
 
 

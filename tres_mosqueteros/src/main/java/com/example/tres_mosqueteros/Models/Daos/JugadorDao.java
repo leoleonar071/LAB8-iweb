@@ -15,7 +15,7 @@ public class JugadorDao extends DaoBase{
         boolean valido = false;
         passwd = SHA256.cipherPassword(passwd);
 
-        String sql = "SELECT * FROM jugadores WHERE usuario = ? AND password_hashed = ? AND estado = 1;";
+        String sql = "SELECT * FROM jugadores WHERE usuario = ? AND password_hashed = ? AND estado_ban = 0;";
 
 
         try (Connection conn = this.getConection();
