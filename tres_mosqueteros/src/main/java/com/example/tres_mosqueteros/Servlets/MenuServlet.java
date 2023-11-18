@@ -6,12 +6,22 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "home", value = "/home")
+@WebServlet(name = "menu", value = "/menu")
 public class MenuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/pages/gestion_personas.jsp").forward(request, response);
 
+        String action = request.getParameter("action") == null? "register" : request.getParameter("action");
+
+
+        switch (action){
+            case "register":
+            request.getRequestDispatcher("pages/register.jsp").forward(request, response);
+            break;
+
+            case "home":
+                request.getRequestDispatcher("/pages/gestion_personas.jsp").forward(request, response);
+        }
     }
 
     @Override

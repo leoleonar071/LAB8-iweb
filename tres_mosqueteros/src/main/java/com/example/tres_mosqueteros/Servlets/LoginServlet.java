@@ -38,17 +38,19 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println("usuario: " + usuario+ " y passwd: "+ password);
 
+
         if(jdao.verificarUserPasswordHashed(usuario, password)){
             System.out.println("credenciales validas");
             Jugador jugador = jdao.obtenerJugador(usuario);
             HttpSession httpSession = request.getSession();
             httpSession.setAttribute("jugadorLogueado", jugador);
-            response.sendRedirect(request.getContextPath()+"/home");
+            response.sendRedirect(request.getContextPath()+"/menu?action=home");
         }else{
             System.out.println("credenciales invalidas");
             request.setAttribute("err","Usuario o password incorrectos");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+
 
     }
 }
