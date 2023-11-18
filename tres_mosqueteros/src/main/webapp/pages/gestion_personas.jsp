@@ -1,6 +1,9 @@
-
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.tres_mosqueteros.Beans.Jugador" %>
+<%@ page import="com.example.tres_mosqueteros.Beans.Poblador" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<% ArrayList<Poblador> listaPobladores = (ArrayList<Poblador>) request.getAttribute("listaPobladores"); %>
 
 
 <!doctype html>
@@ -140,11 +143,11 @@
     <table class="admintable generaltable table-sm" id="users">
         <thead>
             <tr>
-                <th class="header c0 centeralign" style="" scope="col"><a><strong>NOMBRE</strong></a> / <a><strong>APELLIDO</strong></a></th>
-                <th class="header c1 centeralign" style="" scope="col"><a><strong>CÓDIGO</strong></a></th>
-                <th class="header c2" style="" scope="col"><a><strong>ROL EN EL SISTEMA</strong></a></th>
-                <th class="header c2" style="" scope="col"><a><strong>ROL ACADÉMICO</strong></a></th>
-                <th class="header c3" style="" scope="col"><a><strong>ESTADO</strong></a></th>
+                <th class="header c0 centeralign" style="" scope="col"><a><strong>NOMBRE</strong></a></th>
+                <th class="header c1 centeralign" style="" scope="col"><a><strong>GÉNERO</strong></a></th>
+                <th class="header c2" style="" scope="col"><a><strong>ALIMENTACIÓN</strong></a></th>
+                <th class="header c2" style="" scope="col"><a><strong>MORAL</strong></a></th>
+                <th class="header c3" style="" scope="col"><a><strong>TIEMPO</strong></a></th>
                 <th class="header c5" style="" scope="col">EDITAR</th>
                 <td class="header c6 lastcol" style=""></td>
             </tr>

@@ -2,34 +2,35 @@ package com.example.tres_mosqueteros.Models.Daos;
 
 import com.example.tres_mosqueteros.Beans.Poblador;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class PobladorDao extends DaoBase{
 
-    public ArrayList<Poblador> listaPobladores(String id) {
 
-        ArrayList<Poblador> lista = new ArrayList<>();
+    public ArrayList<Poblador> listarPobladores(Integer idJugador){
+
+        ArrayList<Poblador> list= new ArrayList<>();
+
+        String sql = "SELECT * FROM pobladores where idJugador= ?";
 
         try (Connection conn = this.getConection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM pobladores");) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                Poblador poblador = new Poblador();
-               fetchPobladorData(poblador,rs);
+            pstmt.setInt(1, idJugador);
 
+            try (ResultSet rs = pstmt.executeQuery()) {
 
-
-                lista.add(poblador);
+                while (rs.next()) {
+                    Poblador p = new Poblador();
+                    fetchPobladorData(p, rs);
+                    list.add(p);
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        return lista;
+        return list;
     }
 
     private void fetchPobladorData(Poblador poblador, ResultSet rs) throws SQLException{
