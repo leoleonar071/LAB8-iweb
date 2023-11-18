@@ -23,8 +23,7 @@ public class LoginServlet extends HttpServlet {
             }
             response.sendRedirect(request.getContextPath());
         }else{
-
-
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
 
