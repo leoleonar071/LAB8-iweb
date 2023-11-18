@@ -21,18 +21,18 @@
     <div class="login-container">
 
         <div class="login-form">
-            <form method="POST" action="<%=request.getContextPath()%>/login?action=login">
+            <form method="POST" action="<%=request.getContextPath()%>/login">
                 <h2>Iniciar Sesión</h2>
                 <div class="login-input">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="email" name="email" required>
-                    <label for="email">Email</label>
+                    <input type="text" id="user" name="user" required>
+                    <label for="user">Email</label>
                 </div>
 
                 <div class="login-input">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="passwd" name="passwd" required>
-                    <label for="passwd">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                    <label for="password">Contraseña</label>
                 </div>
 
                 <a href="#"><input type="submit" value="Acceder" class="login-button"></a>

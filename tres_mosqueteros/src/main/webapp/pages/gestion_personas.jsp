@@ -32,7 +32,7 @@
 <header>
     <div class="logo" style="margin-left: 30px; margin-top: 30px">
         <a href="#">
-            <img class="logo-img" src='images/logo0.png' alt="logo" style="width: 130px; height: auto;">
+            <img class="logo-img" src='images/logo0.png' alt="logo" style="width: 150px; height: auto;">
         </a>
     </div>
 

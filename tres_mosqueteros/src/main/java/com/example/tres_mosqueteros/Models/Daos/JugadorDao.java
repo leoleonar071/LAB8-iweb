@@ -10,37 +10,30 @@ import java.util.ArrayList;
 
 public class JugadorDao extends DaoBase{
 
-    public boolean login(String mail, String passwd){
+    public boolean verificarUserPasswordHashed(String user, String passwd){
 
         boolean valido = false;
         passwd = SHA256.cipherPassword(passwd);
 
-        String sql = "SELECT j.email, j.password_hashed FROM jugadores j WHERE j.email = ? AND j.password_hashed = ? AND j.estado = 1;";
+        String sql = "SELECT * FROM jugadores WHERE usuario = ? AND password_hashed = ? AND estado = 1;";
 
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, mail);
+            pstmt.setString(1, user);
             pstmt.setString(2, passwd);
 
             try(ResultSet rs = pstmt.executeQuery()){
 
-                while(rs.next()){
-                    String mailDB = rs.getString(1);
-                    String passwdDB = rs.getString(2);
-
-                    if (mailDB == null || passwdDB == null){
-                        valido = false;
-                    } else if (mailDB.equals(mail) && passwdDB.equals(passwd)){
-                        valido = true;
-                    }
+                if(rs.next()){
+                    valido = true;
                 }
-
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return valido;
     }
 
@@ -98,5 +91,43 @@ public class JugadorDao extends DaoBase{
 
         return existe;
     }
+
+
+    public Jugador obtenerJugador(String usuario) {
+
+        Jugador jugador= null;
+
+        String sql = "SELECT * FROM jugadores where usuario = ?";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, usuario);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    jugador = new Jugador();
+                    fetchJugadorData(jugador, rs);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return jugador;
+    }
+
+
+    private void fetchJugadorData(Jugador jugador, ResultSet rs) throws SQLException {
+        jugador.setIdJugador(rs.getInt(1));
+        jugador.setNombre(rs.getString(2));
+        jugador.setEdad(rs.getString(3));
+        jugador.setPaz(rs.getInt(4));
+        jugador.setUsuario(rs.getString(5));
+        jugador.setEmail(rs.getString(6));
+        jugador.setEstado(rs.getInt(9));
+    }
+
 
 }
