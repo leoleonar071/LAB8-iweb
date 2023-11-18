@@ -1,10 +1,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
 
 
 <!doctype html>
 <html lang="es">
-
 
 <head>
 
@@ -57,8 +57,20 @@
             <li>
                 <a href="#" style="color:#000000; font-weight: bold;">Leaderboard</a>
             </li>
+
             <li>
-                <a href="#" style="color:#000000; font-weight: bold;"><i class="fa-solid fa-door-open nav-icon2"></i>Cerrar Sesión</a>
+                <% if(jugadorLogueado.getIdJugador() ==0){ %>
+                <a href="<%=request.getContextPath()%>" style="color:#000000; font-weight: bold;">Iniciar Sesión</a>
+                <% }else{ %>
+                <a href="#" style="color:#000000; font-weight: bold;"><%=jugadorLogueado.getNombre()%></a>
+                <%}%>
+
+            </li>
+
+            <li>
+                <% if(jugadorLogueado.getIdJugador() !=0){ %>
+                <a href="<%=request.getContextPath()%>" style="color:#000000; font-weight: bold;">Cerrar Sesión</a>
+                <%}%>
             </li>
         </ul>
     </nav>

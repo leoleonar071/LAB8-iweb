@@ -13,7 +13,21 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("/pages/gestion_personas.jsp").forward(request, response);
+        HttpSession httpSession = request.getSession();
+        Jugador jugadorLog = (Jugador) httpSession.getAttribute("jugadorLogueado");
+
+        if(jugadorLog != null && jugadorLog.getIdJugador() > 0){
+
+            if(request.getParameter("action") != null){ //es decir, tiene un valor
+                httpSession.invalidate();
+            }
+            response.sendRedirect(request.getContextPath());
+        }else{
+            request.getRequestDispatcher("index.jsp");
+
+        }
+
+
 
     }
 
@@ -30,15 +44,11 @@ public class LoginServlet extends HttpServlet {
             Jugador jugador = jdao.obtenerJugador(usuario);
             HttpSession httpSession = request.getSession();
             httpSession.setAttribute("jugadorLogueado", jugador);
-            response.sendRedirect(request.getContextPath()+"/login");
+            response.sendRedirect(request.getContextPath()+"/home");
         }else{
             System.out.println("credenciales invalidas");
-
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-
-
-
-
 
     }
 }
