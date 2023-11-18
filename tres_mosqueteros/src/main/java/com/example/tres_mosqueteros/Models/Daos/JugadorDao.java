@@ -158,6 +158,86 @@ public class JugadorDao extends DaoBase{
 
         return jugador;
     }
+    public void crear(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena){
+        String Baneado = "0";
+        String paz= "0";
+        String password = jugadorContrasena;
+        jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz) values (?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,jugadorNombre);
+            pstmt.setInt(2,jugadorEdad);
+            pstmt.setString(3,jugadorUsuario);
+            pstmt.setString(4,jugadorCorreo);
+            pstmt.setString(5,password);
+            pstmt.setString(6,jugadorContrasena);
+            pstmt.setString(7,Baneado);
+            pstmt.setString(8,paz);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void jugadorAgregadoListaNegra(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena){
+        //0 No baneado 1 verdadero
+        String Baneado = "1";
+        String paz= "0";
+        String password = jugadorContrasena;
+        jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz) values (?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,jugadorNombre);
+            pstmt.setInt(2,jugadorEdad);
+            pstmt.setString(3,jugadorUsuario);
+            pstmt.setString(4,jugadorCorreo);
+            pstmt.setString(5,password);
+            pstmt.setString(6,jugadorContrasena);
+            pstmt.setString(7,Baneado);
+            pstmt.setString(8,paz);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public boolean buscarPorCorreo(String correo){
+
+        boolean validacion = true;
+
+
+        String sql = "SELECT * FROM jugadores WHERE email = ? AND estado = 1;";
+
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1, correo);
+
+
+            try(ResultSet rs = pstmt.executeQuery()){
+
+                if(rs.next()){
+                    validacion = false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return validacion;
+    }
 
 
 }

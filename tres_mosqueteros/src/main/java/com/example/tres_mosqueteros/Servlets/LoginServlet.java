@@ -58,29 +58,42 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
             case "registrarse": //Registrar jugador
-                String jugadorNombreStr = request.getParameter("jugadorNombre");
+                String jugadorNombre = request.getParameter("jugadorNombre");
                 String jugadorEdadStr = request.getParameter("jugadorEdad");
                 String jugadorUsuarioStr = request.getParameter("jugadorUsuario");
                 String jugadorCorreoStr = request.getParameter("jugadorCorreo");
                 String jugadorPasswordStr = request.getParameter("jugadorPassword");
 
+                System.out.println("Edad ingresada" + jugadorEdadStr);
+
                 boolean isAllValid = true;
-                if(jugadorEdadStr.length() < 13){
+                if(Integer.parseInt(jugadorEdadStr) < 13){
                     isAllValid = false;
+                    System.out.println("Entro el numero");
                 }
 
                 if(isAllValid){
+                    if (jdao.buscarPorCorreo(jugadorCorreoStr)){
+                        Jugador jugador = jdao.buscarPorUsuario(jugadorUsuarioStr); //Busca si hay alguien con el mismo usuario
 
-                    Jugador jugador = jdao.buscarPorUsuario(jugadorUsuarioStr); //Busca si hay alguien con el mismo dni
-                    //Creamos Trabajador
-                    if(jugador == null){  //Se verifica que no se repita el primary key
-                        //jdao.crear(trabajadorNombre,trabajadorApellido,trabajadorCorreo,trabajadorDni,Integer.parseInt(trabajadorIdsede));
-                        response.sendRedirect(request.getContextPath() + "/TrabajadorServlet"); //Una vez creado y dado click a submit se devuelve a la página donde está la lista
-                    }else{
-                        request.getRequestDispatcher("pages/register.jsp").forward(request,response);
+                        //Creamos Trabajador
+                        if(jugador == null){  //Se verifica que no se repita el primary key
+                            jdao.crear(jugadorNombre,Integer.parseInt(jugadorEdadStr),jugadorUsuarioStr,jugadorCorreoStr,jugadorPasswordStr);
+                            response.sendRedirect(request.getContextPath() + "/login"); //Una vez creado y dado click a submit se devuelve a la página donde está la lista
+                        }else{
+                            request.setAttribute("error_usuario","Error: El nombre de usuario ya existe");
+                            request.getRequestDispatcher("pages/register.jsp").forward(request,response);
+                        }
+                    }else {
+                        request.setAttribute("error_edad","No cumple con el requerimiento de edad");
+                        request.getRequestDispatcher("pages/register.jsp.jsp").forward(request, response);
                     }
                 }else{
-                    request.getRequestDispatcher("trabajador/form_new.jsp").forward(request,response);
+
+                    jdao.jugadorAgregadoListaNegra(jugadorNombre,Integer.parseInt(jugadorEdadStr),jugadorUsuarioStr,jugadorCorreoStr,jugadorPasswordStr);
+                    request.setAttribute("error_edad","No cumple con el requerimiento de edad");
+                    request.getRequestDispatcher("pages/register.jsp").forward(request,response);
+
                 }
                 break;
         }
