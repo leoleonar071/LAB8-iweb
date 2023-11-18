@@ -51,3 +51,31 @@ public class LoginServlet extends HttpServlet {
 
     }
 }
+
+/*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String correo = request.getParameter("username");
+        String password = request.getParameter("password");
+        System.out.println("username: " + correo + " | password: " + password);
+        CredencialesDao credencialesDao = new CredencialesDao();
+
+        if(credencialesDao.validarUsuarioPasswordHashed(correo,password)){
+            System.out.println("usuario y password válidos");
+            Jugador jugador = credencialesDao.obtenerJugador(correo); //Obtener al Jugador por el correo. Este es el Jugador logueado
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("usuarioLogueado",jugador);
+            response.sendRedirect(request.getContextPath());
+        }else{
+            System.out.println("usuario o password incorrectos");
+            request.setAttribute("err","Usuario o password incorrectos");
+            request.getRequestDispatcher("index.jsp").forward(request,response);
+        }
+    }
+}
+
+
+<h2>Iniciar Sesión</h2>
+                <% if (request.getAttribute("err") != null) {%>
+                <div class="alert alert-danger" role="alert"><%=request.getAttribute("err")%>
+                </div>
+                <% } %>
+*/
