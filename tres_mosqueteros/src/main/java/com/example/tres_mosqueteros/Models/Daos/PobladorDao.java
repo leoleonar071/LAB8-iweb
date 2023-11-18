@@ -9,8 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class PobladorDao extends DaoBase{
-    public ArrayList<Poblador> listaPobladores() {
-        ArrayList<Poblador> listaPobladores = new ArrayList<>();
+
+    public ArrayList<Poblador> listaPobladores(String id) {
+
+        ArrayList<Poblador> lista = new ArrayList<>();
 
         try (Connection conn = this.getConection();
              Statement stmt = conn.createStatement();
@@ -18,28 +20,34 @@ public class PobladorDao extends DaoBase{
 
             while (rs.next()) {
                 Poblador poblador = new Poblador();
-                poblador.setIdPoblador(rs.getInt(1));
-                poblador.setNombre(rs.getString(3));
-                poblador.setIdGenero(rs.getString(4));
-
-                poblador.setIdProfesion(rs.getString(5));
-                poblador.setAlimentacionXdia(rs.getInt(6));
-
-
-                poblador.setMoral(rs.getInt(10));
-                poblador.setTiempo_en_colonia(rs.getInt(8));
-                poblador.setFuerza(rs.getInt(9));
-                poblador.setProduccion_moral(rs.getInt(7));
-                poblador.setProduccion_alimento(rs.getInt(11));
+               fetchPobladorData(poblador,rs);
 
 
 
-                listaPobladores.add(poblador);
+                lista.add(poblador);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return listaPobladores;
+        return lista;
     }
+
+    private void fetchPobladorData(Poblador poblador, ResultSet rs) throws SQLException{
+        poblador.setIdPoblador(rs.getInt(1));
+        poblador.setNombre(rs.getString(3));
+        poblador.setIdGenero(rs.getString(4));
+        poblador.setIdProfesion(rs.getString(5));
+        poblador.setAlimentacionXdia(rs.getInt(6));
+        poblador.setMoral(rs.getInt(10));
+        poblador.setTiempo_en_colonia(rs.getInt(8));
+        poblador.setFuerza(rs.getInt(9));
+        poblador.setProduccion_moral(rs.getInt(7));
+        poblador.setProduccion_alimento(rs.getInt(11));
+
+    }
+
+
+
+
 
 }
