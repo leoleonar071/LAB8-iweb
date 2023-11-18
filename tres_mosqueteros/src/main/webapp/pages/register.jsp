@@ -21,32 +21,38 @@
     <div class="register-container">
 
         <div class="register-form">
-            <form action="<%=request.getContextPath()%>/" method="POST" id="register-formulario" onsubmit="return validateForm()">
+
+            <form action="<%=request.getContextPath()%>/login?action=registrarse" method="POST" id="register-formulario" onsubmit="return validateForm()">
                 <h2>Registrarse</h2>
                 <div class="register-input">
-                    <input type="text" id="names" name="names" required>
-                    <label for="names">Nombres</label>
+                    <input type="text" id="jugadorNombre" name="jugadorNombre" required>
+                    <label for="jugadorNombre">Nombres</label>
                 </div>
                 <div class="register-input">
-                    <input type="text" id="lastnames" name="lastnames" required>
-                    <label for="lastnames">Apellidos</label>
+                    <input type="text" id="jugadorEdad" name="jugadorEdad" required>
+                    <label for="jugadorEdad">Edad</label>
                 </div>
                 <div class="register-input">
-                    <input type="number" id="code" name="code" required>
-                    <label for="code">Código PUCP</label>
+                    <input type="text" id="jugadorCorreo" name="jugadorCorreo" required>
+                    <label for="jugadorCorreo">correo</label>
                 </div>
-                <div class="register-input">
+                <!--<div class="register-input">
                     <input type="text email" id="email" name="email" required>
                     <label for="email">Correo PUCP <t class="t-light">(codigo@pucp.edu.pe)</t></label>
-                </div>
-                <div class="register-checkbox">
+                </div>-->
+                <!--<div class="register-checkbox">
                     <input type="checkbox" id="condition" name="condition" value="condit">
                     <label for="condition">Soy egresado PUCP</label>
+                </div>-->
+                <div class="register-input">
+                    <input type="text" id="jugadorUsuario" name="jugadorUsuario" required>
+                    <label for="jugadorUsuario">correo</label>
                 </div>
                 <div class="register-input">
-                    <input type="password" id="password" name="password" required>
-                    <label for="password">Contraseña <t class="t-light">(mínimo 8 caracteres)</t></label>
+                    <input type="password" id="jugadorPassword" name="jugadorPassword" required>
+                    <label for="jugadorPassword">Contraseña<t class="t-light">(mínimo 8 caracteres)</t></label>
                 </div>
+
                 <div class="register-input">
                     <input type="password" id="passwordconf" name="passwordconf" required>
                     <label for="passwordconf">Confirmar contraseña</label>
@@ -55,7 +61,7 @@
                 <input type="submit" value="Registrarse" class="register-button">
 
                 <div class="register-back">
-                    <label><a href="<%=request.getContextPath()%>">Regresar</a></label>
+                    <label><a href="<%=request.getContextPath()%>/login">Regresar</a></label>
 
                 </div>
 
@@ -72,14 +78,14 @@
     function validateForm() {
         var password = document.getElementById("password").value;
         var passwordconf = document.getElementById("passwordconf").value;
-        var email = document.getElementById("email").value;
-        var code = document.getElementById("code").value;
+        //var email = document.getElementById("email").value;
+        //var code = document.getElementById("code").value;
         // Validar formato de correo electrónico
-        var emailRegex = /^[A-Za-z0-9._%+-]+@pucp\.edu\.pe$/;
-        if (!emailRegex.test(email)) {
-            alert("Ingrese un correo electrónico válido de PUCP (ejemplo@pucp.edu.pe).");
-            return false;
-        }
+        //var emailRegex = /^[A-Za-z0-9._%+-]+@pucp\.edu\.pe$/;
+        //if (!emailRegex.test(email)) {
+            //alert("Ingrese un correo electrónico válido de PUCP (ejemplo@pucp.edu.pe).");
+            //return false;
+        //}
         // Validar que el código PUCP tenga como máximo 8 números
         if (!(/^\d{8}$/.test(code))) {
             alert("Ingrese un código PUCP válido de 8 dígitos.");

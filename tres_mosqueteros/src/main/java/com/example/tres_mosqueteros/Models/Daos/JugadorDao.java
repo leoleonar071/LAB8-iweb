@@ -129,5 +129,35 @@ public class JugadorDao extends DaoBase{
         jugador.setEstado(rs.getInt(9));
     }
 
+    public Jugador buscarPorUsuario(String usuario){
+
+        Jugador jugador = null;
+
+        String sql = "select * from jugadores where usuario = ?";
+
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,usuario);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()) {
+                    jugador = new Jugador();
+                    jugador.setNombre(rs.getString(2));
+                    jugador.setEdad(rs.getString(3));
+                    jugador.setUsuario(rs.getString(4));
+                    jugador.setEmail(rs.getString(5));
+
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return jugador;
+    }
+
 
 }
