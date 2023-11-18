@@ -1,5 +1,6 @@
 package com.example.tres_mosqueteros.Servlets;
 
+import com.example.tres_mosqueteros.Beans.Jugador;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -20,6 +21,9 @@ public class MenuServlet extends HttpServlet {
             break;
 
             case "home":
+                HttpSession httpSession = request.getSession();
+                Jugador jugador = (Jugador) httpSession.getAttribute("jugadorLogueado");
+                System.out.println("el id del jugador es: "+ jugador.getIdJugador());
                 request.getRequestDispatcher("/pages/gestion_personas.jsp").forward(request, response);
         }
     }
