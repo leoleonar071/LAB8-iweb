@@ -41,7 +41,7 @@
 
             <div>
                 <div class="login-register">
-                    <p>¿No tiene cuenta? <a href="#"> Registrarse</a></p>
+                    <p>¿No tiene cuenta? <a href="<%=request.getContextPath()%>/menu?action=register"> Registrarse</a></p>
                 </div>
             </div>
         </div>

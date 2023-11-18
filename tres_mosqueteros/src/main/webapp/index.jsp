@@ -21,7 +21,7 @@
     <div class="login-container">
 
         <div class="login-form">
-            <form method="POST" action="<%=request.getContextPath()%>/login?action=login">
+            <form method="POST" action="<%=request.getContextPath()%>/login">
                 <h2>Iniciar Sesión</h2>
                 <div class="login-input">
                     <i class="fa-solid fa-envelope"></i>
@@ -41,7 +41,7 @@
 
             <div>
                 <div class="login-register">
-                    <p>¿No tiene cuenta? <a href="<%=request.getContextPath()%>/login?action=register"> Registrarse</a></p>
+                    <p>¿No tiene cuenta? <a href="<%=request.getContextPath()%>/menu?action=register"> Registrarse</a></p>
                 </div>
             </div>
         </div>

@@ -55,7 +55,7 @@
                 <input type="submit" value="Registrarse" class="register-button">
 
                 <div class="register-back">
-                    <label><a href="<%=request.getContextPath()%>/login">Regresar</a></label>
+                    <label><a href="<%=request.getContextPath()%>">Regresar</a></label>
 
                 </div>
 
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="container-fluid footer-container"><p>© Pontificia Universidad Católica del Perú - Todos los derechos reservados</p></div>
+    <div class="container-fluid footer-container"><p>© LOS TRES MOSQUETEROS - Todos los derechos reservados</p></div>
 
 </section>
 

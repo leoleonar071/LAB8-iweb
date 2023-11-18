@@ -201,7 +201,7 @@
 
 
 <footer class="footer">
-    <p style="color: black; font-weight: bold;">Derechos Reservados &copy; 2023</p>
+    <p style="color: black; font-weight: bold;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
 </footer>
 
 
