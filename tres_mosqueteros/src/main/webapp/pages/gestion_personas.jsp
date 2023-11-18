@@ -59,15 +59,6 @@
             </li>
 
             <li>
-                <% if(jugadorLogueado.getIdJugador() ==0){ %>
-                <a href="<%=request.getContextPath()%>" style="color:#000000; font-weight: bold;">Iniciar Sesión</a>
-                <% }else{ %>
-                <a href="#" style="color:#000000; font-weight: bold;"><%=jugadorLogueado.getNombre()%></a>
-                <%}%>
-
-            </li>
-
-            <li>
                 <% if(jugadorLogueado.getIdJugador() !=0){ %>
                 <a href="<%=request.getContextPath()%>" style="color:#000000; font-weight: bold;">Cerrar Sesión</a>
                 <%}%>
