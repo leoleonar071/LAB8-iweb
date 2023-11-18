@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath()+"/home");
         }else{
             System.out.println("credenciales invalidas");
+            request.setAttribute("err","Usuario o password incorrectos");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
