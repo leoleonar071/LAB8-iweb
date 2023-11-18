@@ -2,20 +2,16 @@ package com.example.tres_mosqueteros.Beans;
 import java.util.Random;
 
 public class Granjero extends Persona {
-    private String profesionID;
     private int alimentacionxdia;
     private int moral;
     private int fuerza;
-    private int produccion;
+    private int produccionMoral;
+    private int produccionAlimento;
     Random random = new Random();
 
-    public String getProfesionID() {
-        return profesionID;
-    }
+    public int getProduccionAlimento(){return produccionAlimento;}
+    public void setProduccionAlimento(){this.produccionAlimento = random.nextInt(101) + 100;}
 
-    public void setProfesionID() {
-        this.profesionID = "GRA";
-    }
 
     public int getAlimentacionxdia() {
         return alimentacionxdia;
@@ -41,11 +37,11 @@ public class Granjero extends Persona {
         this.fuerza = 0;
     }
 
-    public int getProduccion() {
-        return produccion;
+    public int getProduccionMoral() {
+        return produccionMoral;
     }
 
-    public void setProduccion(int produccion) {
-        this.produccion = random.nextInt(101) + 100;
+    public void setProduccionMoral() {
+        this.produccionMoral = 0;
     }
 }

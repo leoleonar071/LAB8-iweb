@@ -37,6 +37,24 @@ public class PersonaDao extends DaoBase{
         return list;
     }
 
+    public void crearPersona(Persona persona){
+
+        String sql = "INSERT INTO pobladores (idJugador, nombre, idGenero, idProfesion, alimentacionXdia, produccion_moral, moral, tiempo_en_colonia, fuerza, consumo_alimento, produccion_alimento)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try(Connection conn = this.getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+           // pstmt.setString(1,nuevoEstado);
+            //pstmt.setString(2, idUsuario);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     private void fetchPersonaData(Persona persona, ResultSet rs) throws SQLException{
         persona.setIdPoblador(rs.getInt(1));
         persona.setIdJugador(rs.getInt(2));

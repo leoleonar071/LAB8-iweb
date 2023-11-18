@@ -1,5 +1,6 @@
 package com.example.tres_mosqueteros.Servlets;
 
+import com.example.tres_mosqueteros.Beans.Granjero;
 import com.example.tres_mosqueteros.Beans.Jugador;
 import com.example.tres_mosqueteros.Beans.Persona;
 import com.example.tres_mosqueteros.Models.Daos.PersonaDao;
@@ -42,6 +43,42 @@ public class MenuServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String action = request.getParameter("action") == null? "newPerson" : request.getParameter("action");
+
+
+        switch (action){
+            case "newPerson":
+                String nombre = request.getParameter("nombre");
+                String idGenero = request.getParameter("genero");
+                String idOficio = request.getParameter("lugar");
+
+                switch (idOficio){
+
+                    case "GRA":
+                        Persona persona = new Granjero();
+                        Granjero g = (Granjero) persona;
+                        ((Granjero) persona).setAlimentacionxdia();
+                        ((Granjero) persona).setMoral();
+                        ((Granjero) persona).setFuerza();
+                        ((Granjero) persona).setProduccionAlimento();
+                        ((Granjero) persona).setProduccionMoral();
+
+                        System.out.println("alimentacion x dia: "+ ((Granjero) persona).getAlimentacionxdia());
+                        System.out.println("moral: "+((Granjero) persona).getAlimentacionxdia());
+                        System.out.println("fuerza:" + ((Granjero) persona).getProduccionAlimento());
+                        
+                        break;
+
+
+                }
+
+                System.out.println("nombre:" + nombre);
+                System.out.println("genero: "+ idGenero);
+                System.out.println("idOficio: " + idOficio);
+                break;
+
+        }
 
     }
 }

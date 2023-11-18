@@ -119,7 +119,7 @@
 
 
         <div class="row">
-            <form method="post" action="<%=request.getContextPath()%>" enctype="multipart/form-data">
+            <form method="post" action="<%=request.getContextPath()%>/menu?action=newPerson">
                 <div class="col-lg-6 col-md-12" style="text-align: left; padding-top: 1.5em">
 
 
@@ -131,7 +131,7 @@
                             <div>
                                 <div class="form-group" style="padding-right: 1rem">
                                     <label  style="text-align: left;"><strong>Nombre de la persona:</strong></label>
-                                    <input name="titulo" pattern=".{" type="text" class="form-control"  required>
+                                    <input name="nombre" pattern=".{10,}" type="text" title="Se requieren al menos 10 letras" class="form-control"  required>
                                 </div>
                             </div>
 
@@ -139,47 +139,16 @@
 
                             <div>
                                 <div class="form-group" style="padding-right: 1rem">
-                                    <label  style="text-align: left;"><strong>Subtítulo del evento:</strong></label>
+                                    <label  style="text-align: left;"><strong>Género: </strong></label>
 
-                                    <div class="row">
+                                        <select class="form-select" name="genero" aria-label="Default select example" required>
+                                            <option selected disabled value="">Seleccionar equipo</option>
+                                            <option value="M">M</option>
+                                            <option value="F">F</option>
 
-                                        <div class="col-md-4">
-                                            <input  type="text" class="form-control" value="Fibra Tóxica" disabled readonly>
-                                        </div>
+                                        </select>
 
-                                        <div class="col-md-2">
-                                            <h1 style="font-size:26px; text-align: center">vs</h1>
-                                        </div>
-
-
-                                        <div class="col-md-6">
-                                            <select class="form-select" name="subtituloP2" aria-label="Default select example" required>
-                                                <option selected disabled value="">Seleccionar equipo</option>
-                                                <option value=" vs Hormigón Armado">Hormigón Armado</option>
-                                                <option value=" vs Naranja Mecánica">Naranja Mecánica</option>
-                                                <option value=" vs Electroshock">Electroshock</option>
-                                                <option value=" vs Memoria Cache">Memoria Cache</option>
-                                                <option value=" vs Descontrol">Descontrol</option>
-                                                <option value=" vs PXO">PXO</option>
-                                                <option value=" vs Mafia Cuántica">Mafia Cuántica</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-
-                            <div style="padding-top: 1.5em;"></div>
-
-                            <div class="form-group" style="padding-right: 1rem">
-                                <label style="text-align: left;"><strong>Hora del evento:</strong></label>
-                                <input name="hora" type="time" class="form-control"  required>
-                            </div>
-
-                            <div style="padding-top: 1.5em;"></div>
-
-                            <div class="form-group" style="padding-right: 1rem">
-                                <label  style="text-align: left;"><strong>Fecha del evento:</strong></label>
-                                <input name="fecha" type="date" class="form-control"  required>
                             </div>
 
                             <div style="padding-top: 1.5em;"></div>
@@ -202,17 +171,8 @@
                             <input type="hidden" name="lugar" id="lugarTexto" value="">
 
 
-
-
                             <div style="padding-top: 1.5em;"></div>
 
-                            <div>
-                                <div class="form-group">
-                                    <label style="text-align: left;"><strong>Descripción del evento:</strong></label>
-                                    <textarea class="form-control" name="descripcion" aria-label="With textarea" placeholder="250 palabras máximo." required></textarea>
-                                </div>
-                                <div style="padding-top: 1em;"></div>
-                            </div>
 
 
 
@@ -223,7 +183,7 @@
 
                     <div class="uk-flex uk-flex-center uk-margin-top">
                         <div class="uk-flex uk-flex-center">
-                            <a id="redirect-button" class="btn btn-secondary m-2" href="<%=request.getContextPath()%>/admin_act?action=home">Cancelar</a>
+                            <a id="redirect-button" class="btn btn-secondary m-2" href="<%=request.getContextPath()%>/menu?action=home">Cancelar</a>
                             <button type="submit" class="btn btn-primary m-2">Guardar</button>
                         </div>
                     </div>
