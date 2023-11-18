@@ -74,13 +74,13 @@
 <div class="container-fluid" style="padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
     background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;">
 <div class="text-secondary px-4 py-2 text-center">
-            <div style="padding-bottom: 20px; padding-top: 30px">
-                <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: <%=jugadorLogueado.getNombre()%></h1>
-                <div style="margin-bottom: 5px"></div>
-                <h3 class="fw-bold text-black" style="color: #292826">Panel de Gestión de Personas</h3>
-            </div>
+        <div style="padding-bottom: 20px; padding-top: 30px">
+            <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: <%=jugadorLogueado.getNombre()%></h1>
+            <div style="margin-bottom: 5px"></div>
+            <h3 class="fw-bold text-black" style="color: #292826">Panel de Gestión de Personas</h3>
         </div>
     </div>
+</div>
 
 <div style="padding-top: 40px;"></div>
 

@@ -30,9 +30,13 @@ public class MenuServlet extends HttpServlet {
                 ArrayList<Persona> listaPersonas = personaDao.listarPersonas(jugador.getIdJugador());
                 request.setAttribute("listaPersonas", listaPersonas);
                 request.getRequestDispatcher("/pages/gestion_personas.jsp").forward(request, response);
+                break;
 
             case "crearPersona":
-                request.getRequestDispatcher("/pages/new_persona.jsp").forward(request, response);
+
+
+                request.getRequestDispatcher("/pages/new_person.jsp").forward(request, response);
+                break;
         }
     }
 

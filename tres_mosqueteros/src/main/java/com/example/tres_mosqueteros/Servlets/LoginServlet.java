@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
                     Jugador jugador = jdao.buscarPorUsuario(jugadorUsuarioStr); //Busca si hay alguien con el mismo dni
                     //Creamos Trabajador
                     if(jugador == null){  //Se verifica que no se repita el primary key
-                        jdao.crear(trabajadorNombre,trabajadorApellido,trabajadorCorreo,trabajadorDni,Integer.parseInt(trabajadorIdsede));
+                        //jdao.crear(trabajadorNombre,trabajadorApellido,trabajadorCorreo,trabajadorDni,Integer.parseInt(trabajadorIdsede));
                         response.sendRedirect(request.getContextPath() + "/TrabajadorServlet"); //Una vez creado y dado click a submit se devuelve a la página donde está la lista
                     }else{
                         request.getRequestDispatcher("pages/register.jsp").forward(request,response);

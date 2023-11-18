@@ -21,7 +21,7 @@
     <div class="login-container">
 
         <div class="login-form">
-            <form method="POST" action="<%=request.getContextPath()%>/login">
+            <form method="POST" action="<%=request.getContextPath()%>/login?action=iniciar_sesion">
                 <h2>Iniciar Sesión</h2>
                 <% if (request.getAttribute("err") != null) {%>
                 <div class="alert alert-danger" role="alert"><%=request.getAttribute("err")%>
