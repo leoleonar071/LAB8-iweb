@@ -1,8 +1,8 @@
 package com.example.tres_mosqueteros.Servlets;
 
-import com.example.tres_mosqueteros.Beans.Granjero;
-import com.example.tres_mosqueteros.Beans.Jugador;
-import com.example.tres_mosqueteros.Beans.Persona;
+import com.example.tres_mosqueteros.Models.Beans.Granjero;
+import com.example.tres_mosqueteros.Models.Beans.Jugador;
+import com.example.tres_mosqueteros.Models.Beans.Persona;
 import com.example.tres_mosqueteros.Models.Daos.PersonaDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -34,8 +34,9 @@ public class MenuServlet extends HttpServlet {
                 break;
 
             case "crearPersona":
-
-
+                HttpSession httpSession1 = request.getSession();
+                Jugador jugador1 = (Jugador) httpSession1.getAttribute("jugadorLogueado");
+                System.out.println("el id del jugador es: "+ jugador1.getIdJugador());
                 request.getRequestDispatcher("/pages/new_person.jsp").forward(request, response);
                 break;
         }
@@ -46,42 +47,37 @@ public class MenuServlet extends HttpServlet {
         PersonaDao personaDao = new PersonaDao();
         String action = request.getParameter("action") == null? "newPerson" : request.getParameter("action");
 
+        HttpSession httpSession = request.getSession();
+        Jugador jugador = (Jugador) httpSession.getAttribute("jugadorLogueado");
 
         switch (action){
             case "newPerson":
+
+                Integer idJugador = jugador.getIdJugador();
                 String nombre = request.getParameter("nombre");
                 String idGenero = request.getParameter("genero");
-                String idOficio = request.getParameter("lugar");
+                String idProfesion = request.getParameter("lugar");
 
-                switch (idOficio){
+                switch (idProfesion){
 
                     case "GRA":
                         Persona persona = new Granjero();
                         Granjero g = (Granjero) persona;
-                        persona.setNombre(nombre);
-                        persona.setIdGenero(idGenero);
-                        persona.setIdProfesion(idOficio);
-                        persona.setTiempo_en_colonia(0);
                         ((Granjero) persona).setAlimentacionxdia();
+                        ((Granjero) persona).setProduccionMoral();
                         ((Granjero) persona).setMoral();
+                        persona.setTiempo_en_colonia(0);
                         ((Granjero) persona).setFuerza();
                         ((Granjero) persona).setProduccionAlimento();
-                        ((Granjero) persona).setProduccionMoral();
 
-                        System.out.println("alimentacion x dia: "+ ((Granjero) persona).getAlimentacionxdia());
-                        System.out.println("moral: "+((Granjero) persona).getAlimentacionxdia());
-                        System.out.println("fuerza:" + ((Granjero) persona).getFuerza());
-                        System.out.println("produccion alimento:" + ((Granjero) persona).getProduccionAlimento());
-                        System.out.println("produccion moral:" + ((Granjero) persona).getProduccionMoral());
-                        personaDao.crearPersona(persona);
+                        personaDao.crearPersona(idJugador,nombre,idGenero,idProfesion,((Granjero) persona).getAlimentacionxdia(),((Granjero) persona).getProduccionMoral(), ((Granjero) persona).getMoral(),persona.getTiempo_en_colonia(),((Granjero) persona).getFuerza(),((Granjero) persona).getProduccionAlimento());
+                        response.sendRedirect(request.getContextPath()+"/menu?action=home");
                         break;
 
 
                 }
 
-                System.out.println("nombre:" + nombre);
-                System.out.println("genero: "+ idGenero);
-                System.out.println("idOficio: " + idOficio);
+
                 break;
 
         }

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Models.Beans.Jugador" class="com.example.tres_mosqueteros.Models.Beans.Jugador"/>
 
 
 <!doctype html>
@@ -29,6 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.4/dist/js/uikit-icons.min.js"></script>
 
     <link rel="icon" type="image/jpg" href="favicon.png" />
+    <link rel="stylesheet" href="sweetalert2.min.css">
 
     <style>
         #imagen-container img {
@@ -43,11 +44,6 @@
         }
     </style>
 
-    <style>
-        #texto-mostrado-url {
-            color: blue; /* Establece el color del texto en azul */
-        }
-    </style>
 
     <title>Home | Semana de Ingeniería 2023</title>
 </head>
@@ -119,7 +115,7 @@
 
 
         <div class="row">
-            <form method="post" action="<%=request.getContextPath()%>/menu?action=newPerson">
+            <form id="form" method="post" action="<%=request.getContextPath()%>/menu?action=newPerson">
                 <div class="col-lg-6 col-md-12" style="text-align: left; padding-top: 1.5em">
 
 
@@ -184,7 +180,7 @@
                     <div class="uk-flex uk-flex-center uk-margin-top">
                         <div class="uk-flex uk-flex-center">
                             <a id="redirect-button" class="btn btn-secondary m-2" href="<%=request.getContextPath()%>/menu?action=home">Cancelar</a>
-                            <button type="submit" class="btn btn-primary m-2">Guardar</button>
+                            <button onclick="mostrarAlertaYRedirigir(event)" type="button" class="btn btn-primary m-2">Guardar</button>
                         </div>
                     </div>
 
@@ -256,12 +252,44 @@
 
 
 
-<script src="js/upload.js"></script>
+<script>
+
+    function mostrarAlertaYRedirigir(event) {
+    event.preventDefault();
+
+        Swal.fire({
+            title: "Custom width, padding, color, background.",
+            width: 600,
+            padding: "3em",
+            color: "#716add",
+            background: "#fff url(/images/trees.png)",
+            backdrop: `
+                        rgba(0,0,123,0.4)
+                        url("gato.gif")
+                        left top
+                        no-repeat
+                        `
+        }).then(() => {
+        // Redirige al servlet después de cerrar la alerta
+        document.getElementById('form').submit(); // Envía el formulario
+    });
+    }
+
+
+</script>
+
+
+
+
+
+
+    <script src="js/upload.js"></script>
 <script src="js/bootstrap/bootstrap.js"></script>
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
 
 
 </body-form>

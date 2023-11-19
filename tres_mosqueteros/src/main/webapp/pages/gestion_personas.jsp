@@ -1,8 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.tres_mosqueteros.Beans.Jugador" %>
-<%@ page import="com.example.tres_mosqueteros.Beans.Persona" %>
+<%@ page import="com.example.tres_mosqueteros.Models.Beans.Jugador" %>
+<%@ page import="com.example.tres_mosqueteros.Models.Beans.Persona" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Models.Beans.Jugador" class="com.example.tres_mosqueteros.Models.Beans.Jugador"/>
 <% ArrayList<Persona> listaPersonas = (ArrayList<Persona>) request.getAttribute("listaPersonas"); %>
 
 

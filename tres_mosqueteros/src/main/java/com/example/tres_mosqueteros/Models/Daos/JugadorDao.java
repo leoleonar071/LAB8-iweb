@@ -1,12 +1,10 @@
 package com.example.tres_mosqueteros.Models.Daos;
 
 import com.example.tres_mosqueteros.SHA256;
-import com.example.tres_mosqueteros.Beans.Jugador;
+import com.example.tres_mosqueteros.Models.Beans.Jugador;
 
 
-import java.net.ConnectException;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class JugadorDao extends DaoBase{
 

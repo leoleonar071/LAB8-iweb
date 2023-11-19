@@ -1,6 +1,6 @@
 package com.example.tres_mosqueteros.Servlets;
 
-import com.example.tres_mosqueteros.Beans.Jugador;
+import com.example.tres_mosqueteros.Models.Beans.Jugador;
 import com.example.tres_mosqueteros.Models.Daos.JugadorDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
