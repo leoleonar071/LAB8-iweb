@@ -5,6 +5,13 @@
 <jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
 <% ArrayList<Persona> listaPersonas = (ArrayList<Persona>) request.getAttribute("listaPersonas"); %>
 
+<% int sumacomida = (int) request.getAttribute("sumacomida"); %>
+<% int sumafuerza = (int) request.getAttribute("sumafuerza"); %>
+<% ArrayList<Persona> lista5bajos = (ArrayList<Persona>) request.getAttribute("lista5bajos"); %>
+
+
+
+
 
 <!doctype html>
 <html lang="es">
@@ -48,7 +55,7 @@
     <nav class="nav-bar">
         <ul>
             <li>
-                <a href="#" style="color: #000000; font-weight: bold;" class="active">Gestión de Recursos</a>
+                <a href="#" style="color: #000000; font-weight: bold;" class="active">Gestión de Personas</a>
             </li>
 
             <li>
@@ -127,7 +134,11 @@
             <button type="submit" id="miBoton" class="btn btn-primary">Terminar día</button>
             <script src="pages/estadisticas.js"></script>
             <script>
+                // Mantén tu evento de click actual
                 document.getElementById("miBoton").addEventListener("click", ejecutarEstadisticas);
+
+                // Define la función para ejecutar el DAO del servlet
+
             </script>
 
 
@@ -163,7 +174,18 @@
 
 
 
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="lead">La comida del reino es: <%= sumacomida %></p>
+        </div>
+        <div class="col-sm-6">
+            <p class="lead">La fuerza del reino es: <%= sumafuerza %></p>
+        </div>
+    </div>
+</div>
 
+<br>
 <div class="table-responsive container">
 <H2>Pobladores en condición crítica hoy</H2><br>
 
@@ -187,7 +209,7 @@
 
 <tbody>
 
-<% for (Persona persona : listaPersonas){%>
+<% for (Persona persona : lista5bajos){%>
 <tr>
 <td><a><%=persona.getIdPoblador()%></a></td>
 <td><%=persona.getNombre()%></td>
