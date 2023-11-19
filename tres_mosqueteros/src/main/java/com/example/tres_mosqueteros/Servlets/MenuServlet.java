@@ -39,6 +39,25 @@ public class MenuServlet extends HttpServlet {
 
                 break;
 
+
+            case "gestionRecursos":
+                HttpSession httpSession3 = request.getSession();
+                Jugador jugador = (Jugador) httpSession3.getAttribute("jugadorLogueado");
+                System.out.println("el id del jugador es: "+ jugador.getIdJugador());
+
+
+                int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador.getIdJugador());
+                request.setAttribute("sumacomida", sumacomida);
+                int sumafuerza= personaDao.obtener_fuerza_total(jugador.getIdJugador());
+                request.setAttribute("sumafuerza", sumafuerza);
+                ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador.getIdJugador());
+                request.setAttribute("lista5bajos", lista5bajos);
+
+                request.getRequestDispatcher("/pages/gestion_recursos.jsp").forward(request, response);
+
+
+                break;
+
             case "crearPersona":
                 HttpSession httpSession1 = request.getSession();
                 Jugador jugador1 = (Jugador) httpSession1.getAttribute("jugadorLogueado");
