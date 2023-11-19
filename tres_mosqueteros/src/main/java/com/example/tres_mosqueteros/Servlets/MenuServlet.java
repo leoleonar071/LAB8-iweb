@@ -42,15 +42,15 @@ public class MenuServlet extends HttpServlet {
 
             case "gestionRecursos":
                 HttpSession httpSession3 = request.getSession();
-                Jugador jugador = (Jugador) httpSession3.getAttribute("jugadorLogueado");
-                System.out.println("el id del jugador es: "+ jugador.getIdJugador());
+                Jugador jugador2 = (Jugador) httpSession3.getAttribute("jugadorLogueado");
+                System.out.println("el id del jugador es: "+ jugador2.getIdJugador());
 
 
-                int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador.getIdJugador());
+                int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador2.getIdJugador());
                 request.setAttribute("sumacomida", sumacomida);
-                int sumafuerza= personaDao.obtener_fuerza_total(jugador.getIdJugador());
+                int sumafuerza= personaDao.obtener_fuerza_total(jugador2.getIdJugador());
                 request.setAttribute("sumafuerza", sumafuerza);
-                ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador.getIdJugador());
+                ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador2.getIdJugador());
                 request.setAttribute("lista5bajos", lista5bajos);
 
                 request.getRequestDispatcher("/pages/gestion_recursos.jsp").forward(request, response);
@@ -74,10 +74,14 @@ public class MenuServlet extends HttpServlet {
 
             case "editarPersona":
                 HttpSession httpSession2 = request.getSession();
-                Jugador jugador2 = (Jugador) httpSession2.getAttribute("jugadorLogueado");
+                Jugador jugador3 = (Jugador) httpSession2.getAttribute("jugadorLogueado");
 
-                if(jugador2 != null){
-                    String idPoblador = request.getParameter("idPoblador");
+                if(jugador3 != null){
+                    String idPersona = request.getParameter("idPersona");
+                    System.out.println("idPersona: " +idPersona);
+                    Persona persona = personaDao.obtenerPersona(idPersona);
+                    System.out.println("nombre: " + persona.getNombre());
+                    request.setAttribute("persona", persona);
                     request.getRequestDispatcher("/pages/edit_person.jsp").forward(request, response);
                 }else{
                     response.sendRedirect(request.getContextPath());

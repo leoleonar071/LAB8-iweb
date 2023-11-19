@@ -33,6 +33,8 @@ public class PersonaDao extends DaoBase{
                 while (rs.next()) {
                     Persona p = new Persona();
                     fetchPersonaData(p, rs);
+                    p.setGenero(rs.getString(12));
+                    p.setProfesion(rs.getString(13));
                     list.add(p);
                 }
             }
@@ -104,6 +106,27 @@ public class PersonaDao extends DaoBase{
         }
 
         return poblador;
+    }
+
+    public Persona obtenerPersona(String idPersona) {
+        Persona persona = null;
+
+        String sql = "SELECT * FROM lostresmosqueteros.pobladores where idPoblador = ?"; // Obtener un poblador aleatorio
+
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, idPersona);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                persona = new Persona();
+                fetchPersonaData(persona, rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return persona;
     }
 
     public int obtener_fuerza_total(int idJugador ){
