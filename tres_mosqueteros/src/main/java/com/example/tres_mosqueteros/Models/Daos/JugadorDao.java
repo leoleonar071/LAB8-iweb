@@ -39,13 +39,11 @@ public class JugadorDao extends DaoBase{
     // primero usar la funcion crear jugador
     public void crearUsuario(String nombre, int edad, String usuario, String email, String passwordStr){
 
-        String sql = "INSERT INTO `l8_iweb`.`jugadores` (`nombre`, `edad`, `usuario`, `email`, `password_hashed`, `estado`) VALUES ( ?, ?, ?, ?, ?,?);";
+        String sql = "INSERT INTO `l8_iweb`.`jugadores` (`nombre`, `edad`, `usuario`, `email`, `password_hashed`, `estado`,hora) VALUES ( ?, ?, ?, ?, ?,?,?);";
 
         String passworHash = SHA256.cipherPassword(passwordStr);
 
         Boolean estado= edad>12;
-
-
 
 
         try(Connection conn = this.getConection();
@@ -57,6 +55,7 @@ public class JugadorDao extends DaoBase{
             pstmt.setString(4, email);
             pstmt.setString(5,passworHash);
             pstmt.setBoolean(6,estado);
+            pstmt.setInt(7, 0);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -125,6 +124,7 @@ public class JugadorDao extends DaoBase{
         jugador.setUsuario(rs.getString(5));
         jugador.setEmail(rs.getString(6));
         jugador.setEstado(rs.getInt(9));
+        jugador.setHora(rs.getInt(10));
     }
 
     public Jugador buscarPorUsuario(String usuario){
@@ -161,7 +161,7 @@ public class JugadorDao extends DaoBase{
         String paz= "0";
         String password = jugadorContrasena;
         jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
-        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz, hora) values (?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -174,6 +174,7 @@ public class JugadorDao extends DaoBase{
             pstmt.setString(6,jugadorContrasena);
             pstmt.setString(7,Baneado);
             pstmt.setString(8,paz);
+            pstmt.setInt(9,0);
 
             pstmt.executeUpdate();
 
@@ -235,6 +236,22 @@ public class JugadorDao extends DaoBase{
         }
 
         return validacion;
+    }
+
+    public void actualizarHora(Integer idJugador, Integer nuevaHora){
+
+        String sql = "update jugadores set hora = ? where idJugador = ?";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,nuevaHora);
+            pstmt.setInt(2,idJugador);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

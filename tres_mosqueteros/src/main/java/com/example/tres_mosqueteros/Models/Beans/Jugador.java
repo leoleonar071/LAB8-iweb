@@ -9,8 +9,16 @@ public class Jugador {
     private String usuario;
     private String email;
     private int estado;
+    private int hora;
 
 
+    public int getHora() {
+        return hora;
+    }
+
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
 
     public int getIdJugador() {
         return idJugador;
