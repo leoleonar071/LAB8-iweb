@@ -30,6 +30,8 @@
 
     <link rel="icon" type="image/jpg" href="favicon.png" />
     <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="js/showError.js"></script>
+
 
     <style>
         #imagen-container img {
@@ -127,7 +129,7 @@
                             <div>
                                 <div class="form-group" style="padding-right: 1rem">
                                     <label  style="text-align: left;"><strong>Nombre de la persona:</strong></label>
-                                    <input name="nombre" pattern=".{10,}" type="text" title="Se requieren al menos 10 letras" class="form-control"  required>
+                                    <input name="nombre" id="nombrePersona" type="text" class="form-control"  required>
                                 </div>
                             </div>
 
@@ -139,8 +141,8 @@
 
                                         <select class="form-select" name="genero" aria-label="Default select example" required>
                                             <option selected disabled value="">Seleccionar equipo</option>
-                                            <option value="M">M</option>
-                                            <option value="F">F</option>
+                                            <option value="M">M (masculino)</option>
+                                            <option value="F">F (femenino)</option>
 
                                         </select>
 
@@ -159,12 +161,12 @@
 
                             </select>
                             <div id="imagen-container">
-                                <img id="imagen1" src="https://th.bing.com/th/id/OIG.4yvtJarKEiznGuLgyXvL?pid=ImgGn" alt="Imagen 1">
-                                <img id="imagen2" src="https://th.bing.com/th/id/OIG.IElTutWh8V5DqQw4zfrp?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Imagen 2">
-                                <img id="imagen3" src="https://th.bing.com/th/id/OIG.jjCi01.YZWQ_f6NgFdmi?pid=ImgGn" alt="Imagen 3">
+                                <img id="imagen1" src="https://th.bing.com/th/id/OIG.iOvKX4MmJxI4ZeAz3874?pid=ImgGn" alt="Imagen 1">
+                                <img id="imagen2" src="https://th.bing.com/th/id/OIG.Ii_Gx0xWqZxFeMlvMaD_?pid=ImgGn" alt="Imagen 2">
+                                <img id="imagen3" src="https://th.bing.com/th/id/OIG.DPGU4HHy7zWFDp_jYHZa?pid=ImgGn" alt="Imagen 3">
                                 <img id="imagen4" src="https://th.bing.com/th/id/OIG.zsC6bLxpwnxYsFL97wQO?pid=ImgGn" alt="Imagen 4">
                             </div>
-                            <input type="hidden" name="lugar" id="lugarTexto" value="">
+                            <input type="hidden" name="idProfesion" id="lugarTexto" value="">
 
 
                             <div style="padding-top: 1.5em;"></div>
@@ -180,7 +182,7 @@
                     <div class="uk-flex uk-flex-center uk-margin-top">
                         <div class="uk-flex uk-flex-center">
                             <a id="redirect-button" class="btn btn-secondary m-2" href="<%=request.getContextPath()%>/menu?action=home">Cancelar</a>
-                            <button onclick="mostrarAlertaYRedirigir(event)" type="button" class="btn btn-primary m-2">Guardar</button>
+                            <button type="submit" class="btn btn-primary m-2">Guardar</button>
                         </div>
                     </div>
 
@@ -250,32 +252,40 @@
 </script>
 
 
-
-
 <script>
+    const nombre = document.getElementById("nombrePersona")
+    const form = document.getElementById("form")
 
-    function mostrarAlertaYRedirigir(event) {
-    event.preventDefault();
+    form.addEventListener("submit", e=>{
 
-        Swal.fire({
-            title: "Custom width, padding, color, background.",
-            width: 600,
-            padding: "3em",
-            color: "#716add",
-            background: "#fff url(/images/trees.png)",
-            backdrop: `
-                        rgba(0,0,123,0.4)
-                        url("gato.gif")
-                        left top
+        if (nombre.value.length>10){
+            showError("El nombre de la persona es muy largo. Debe contener como máximo 10 caracteres")
+            e.preventDefault()
+        }
+        else{
+            //Envia el form al servlet
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Felicidades!! Haz añadido una nueva persona a tu civilización",
+                width: 600,
+                padding: "3em",
+                color: "#FFFFFF",
+                confirmButtonText: "Ver civilización",
+                background: "#F0B20E",
+                confirmButtonColor: "#1A1A18",
+                backdrop: `
+                        rgba(0,0,0,0.4)
+                        url("https://i.pinimg.com/originals/28/1c/41/281c41a190e26ee83cd1da35008ac30a.gif")
+                        center top
                         no-repeat
                         `
-        }).then(() => {
-        // Redirige al servlet después de cerrar la alerta
-        document.getElementById('form').submit(); // Envía el formulario
-    });
-    }
-
-
+            }).then(() => {
+                // Redirige al servlet después de cerrar la alerta
+                document.getElementById('form').submit(); // Envía el formulario
+            });
+        }
+    })
 </script>
 
 

@@ -17,7 +17,8 @@ public class PersonaDao extends DaoBase{
                 "FROM pobladores p\n" +
                 "inner join genero_poblador g on (p.idGenero = g.idGenero)\n" +
                 "left join profesion_poblador prof on (prof.idProfesion = p.idProfesion)\n" +
-                "where idJugador = ?";
+                "where idJugador = ? " +
+                "order by idPoblador";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
