@@ -120,8 +120,12 @@ public class PersonaDao extends DaoBase{
             pstmt.setString(1, idPersona);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-                persona = new Persona();
-                fetchPersonaData(persona, rs);
+
+                while(rs.next()){
+                    persona = new Persona();
+                    fetchPersonaData(persona, rs);
+                }
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
