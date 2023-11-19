@@ -73,8 +73,8 @@
 
 <div class="container-fluid" style="padding-left:0 !important; padding-right: 0 !important; background: rgb(255, 255, 0) !important;
     background: radial-gradient(circle, rgba(255, 255, 0, 1) 0%, rgba(255, 102, 0, 1) 100%) !important;">
-<div class="text-secondary px-4 py-2 text-center">
-        <div style="padding-bottom: 20px; padding-top: 30px">
+<div class="text-secondary px-1 py-10 text-center">
+        <div style="padding-bottom: 5px; padding-top: 0px">
             <h1 class="display-5 fw-bold text-black" style="color: #292826">Bienvenido Jugador: <%=jugadorLogueado.getNombre()%></h1>
             <div style="margin-bottom: 5px"></div>
             <h3 class="fw-bold text-black" style="color: #292826">Panel de Gestión de Personas</h3>
@@ -116,7 +116,7 @@
                 <td><a><%=persona.getTiempo_en_colonia()%></a></td>
                 <td><%=persona.getFuerza()%></td>
                 <td><%=persona.getProduccionAlimento()%></td>
-                <td><a href="<%=request.getContextPath()%>/admin_gen?action=editar"><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/edit-row.png" alt="edit-row"/></a></td>
+                <td><a href="<%=request.getContextPath()%>/menu?action=editarPersona&idPersona=<%=persona.getIdPoblador()%>"><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/edit-row.png" alt="edit-row"/></a></td>
 
             </tr>
         <%}%>
@@ -137,7 +137,8 @@
 
 
 <footer class="footer">
-    <p style="color: black; font-weight: bold;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
+    <p style="color: black;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
+    <hr/>
 </footer>
 
 

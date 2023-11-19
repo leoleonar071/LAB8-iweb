@@ -210,7 +210,8 @@
 
 
 <footer class="footer-form">
-    <p style="color: black; font-weight: bold;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
+    <p style="color: black">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
+    <hr/>
 </footer>
 
 

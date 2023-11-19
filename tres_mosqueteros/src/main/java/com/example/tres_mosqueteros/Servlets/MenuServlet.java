@@ -42,10 +42,27 @@ public class MenuServlet extends HttpServlet {
             case "crearPersona":
                 HttpSession httpSession1 = request.getSession();
                 Jugador jugador1 = (Jugador) httpSession1.getAttribute("jugadorLogueado");
-                System.out.println("el id del jugador es: "+ jugador1.getIdJugador());
-                System.out.println("la hora actual es:" + jugador1.getHora() +" al darle a crear");
-                request.getRequestDispatcher("/pages/new_person.jsp").forward(request, response);
+
+                if(jugador1 != null){
+                    System.out.println("el id del jugador es: "+ jugador1.getIdJugador());
+                    System.out.println("la hora actual es:" + jugador1.getHora() +" al darle a crear");
+                    request.getRequestDispatcher("/pages/new_person.jsp").forward(request, response);
+                }else{
+                    response.sendRedirect(request.getContextPath());
+                }
+
                 break;
+
+            case "editarPersona":
+                HttpSession httpSession2 = request.getSession();
+                Jugador jugador2 = (Jugador) httpSession2.getAttribute("jugadorLogueado");
+
+                if(jugador2 != null){
+                    String idPoblador = request.getParameter("idPoblador");
+                    request.getRequestDispatcher("/pages/edit_person.jsp").forward(request, response);
+                }else{
+                    response.sendRedirect(request.getContextPath());
+                }
         }
     }
 

@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-input[type="text"]:-internal-autofill-selected {
-    background-color: #3498db !important;
-    color: black !important;
-}
-
 
 *{
     font-family: 'Poppins', sans-serif;
