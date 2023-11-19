@@ -1,8 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.tres_mosqueteros.Beans.Jugador" %>
-<%@ page import="com.example.tres_mosqueteros.Beans.Persona" %>
+<%@ page import="com.example.tres_mosqueteros.Models.Beans.Jugador" %>
+<%@ page import="com.example.tres_mosqueteros.Models.Beans.Persona" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Models.Beans.Jugador" class="com.example.tres_mosqueteros.Models.Beans.Jugador"/>
 <% ArrayList<Persona> listaPersonas = (ArrayList<Persona>) request.getAttribute("listaPersonas"); %>
 
 
@@ -28,7 +28,7 @@
 
     <link rel="icon" type="image/jpg" href="favicon.png" />
 
-    <title>Administración de Usuarios | Semana de Ingeniería 2023</title>
+    <title>Administración de Personas</title>
 </head>
 
 <body>
@@ -82,60 +82,6 @@
     </div>
 </div>
 
-<div style="padding-top: 40px;"></div>
-
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-10">
-
-            <form method="post" action="<%=request.getContextPath()%>/admin_gen?action=home&ac=busqueda">
-
-                <div class="custom-form-group">
-                    <input type="text" class="form-control" name="busquedaNombreCodigo" placeholder="Buscar por nombre o código" style="width: 120%">
-                </div>
-                <button type="submit" class="btn btn-primary">Aplicar filtros</button>
-
-                <a class="btn btn-primary" href="<%=request.getContextPath()%>/admin_gen" role="button">Borrar filtros</a>
-            </form>
-        </div>
-
-        <div class="col-md-2" >
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                    ESTADO
-                </button>
-                <ul class="dropdown-menu dropdown-menu-lg-end">
-                    <form method="post" action="<%=request.getContextPath()%>/admin_gen?action=home&ac=busquedaPorEstado&id=ACC">
-                        <li><button class="dropdown-item" type="submit">Aceptados</button></li>
-                    </form>
-                    <form method="post" action="<%=request.getContextPath()%>/admin_gen?action=home&ac=busquedaPorEstado&id=VER">
-                        <li><button class="dropdown-item" type="submit">Sin Asignar</button></li>
-                    </form>
-                    <form method="post" action="<%=request.getContextPath()%>/admin_gen?action=home&ac=busquedaPorEstado&id=BAN">
-                        <li><button class="dropdown-item" type="submit">Baneados</button></li>
-                    </form>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
-    <div style="padding-top: 15px;"></div>
-    <hr class="hr hr-blurry"/>
-</div>
-
-<div class="container">
-    <form autocomplete="off"  method="post" accept-charset="utf-8" id="mform2_c5Hfs9zIVAeeWpH" class="mform">
-        <div style="display: none;"><input name="sesskey" type="hidden" value="mfwKCcurEd">
-            <input name="_qf__user_active_filter_form" type="hidden" value="1">
-        </div>
-    </form>
-</div>
 
 <div style="padding-top: 25px;"></div>
 

@@ -1,12 +1,10 @@
 package com.example.tres_mosqueteros.Models.Daos;
 
 import com.example.tres_mosqueteros.SHA256;
-import com.example.tres_mosqueteros.Beans.Jugador;
+import com.example.tres_mosqueteros.Models.Beans.Jugador;
 
 
-import java.net.ConnectException;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class JugadorDao extends DaoBase{
 
@@ -41,13 +39,11 @@ public class JugadorDao extends DaoBase{
     // primero usar la funcion crear jugador
     public void crearUsuario(String nombre, int edad, String usuario, String email, String passwordStr){
 
-        String sql = "INSERT INTO `l8_iweb`.`jugadores` (`nombre`, `edad`, `usuario`, `email`, `password_hashed`, `estado`) VALUES ( ?, ?, ?, ?, ?,?);";
+        String sql = "INSERT INTO `l8_iweb`.`jugadores` (`nombre`, `edad`, `usuario`, `email`, `password_hashed`, `estado`,hora) VALUES ( ?, ?, ?, ?, ?,?,?);";
 
         String passworHash = SHA256.cipherPassword(passwordStr);
 
         Boolean estado= edad>12;
-
-
 
 
         try(Connection conn = this.getConection();
@@ -59,6 +55,7 @@ public class JugadorDao extends DaoBase{
             pstmt.setString(4, email);
             pstmt.setString(5,passworHash);
             pstmt.setBoolean(6,estado);
+            pstmt.setInt(7, 0);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -127,6 +124,7 @@ public class JugadorDao extends DaoBase{
         jugador.setUsuario(rs.getString(5));
         jugador.setEmail(rs.getString(6));
         jugador.setEstado(rs.getInt(9));
+        jugador.setHora(rs.getInt(10));
     }
 
     public Jugador buscarPorUsuario(String usuario){
@@ -157,6 +155,103 @@ public class JugadorDao extends DaoBase{
         }
 
         return jugador;
+    }
+    public void crear(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena){
+        String Baneado = "0";
+        String paz= "0";
+        String password = jugadorContrasena;
+        jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz, hora) values (?,?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,jugadorNombre);
+            pstmt.setInt(2,jugadorEdad);
+            pstmt.setString(3,jugadorUsuario);
+            pstmt.setString(4,jugadorCorreo);
+            pstmt.setString(5,password);
+            pstmt.setString(6,jugadorContrasena);
+            pstmt.setString(7,Baneado);
+            pstmt.setString(8,paz);
+            pstmt.setInt(9,0);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void jugadorAgregadoListaNegra(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena){
+        //0 No baneado 1 verdadero
+        String Baneado = "1";
+        String paz= "0";
+        String password = jugadorContrasena;
+        jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz) values (?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,jugadorNombre);
+            pstmt.setInt(2,jugadorEdad);
+            pstmt.setString(3,jugadorUsuario);
+            pstmt.setString(4,jugadorCorreo);
+            pstmt.setString(5,password);
+            pstmt.setString(6,jugadorContrasena);
+            pstmt.setString(7,Baneado);
+            pstmt.setString(8,paz);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public boolean buscarPorCorreo(String correo){
+
+        boolean validacion = true;
+
+
+        String sql = "SELECT * FROM jugadores WHERE email = ? AND estado = 1;";
+
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1, correo);
+
+
+            try(ResultSet rs = pstmt.executeQuery()){
+
+                if(rs.next()){
+                    validacion = false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return validacion;
+    }
+
+    public void actualizarHora(Integer idJugador, Integer nuevaHora){
+
+        String sql = "update jugadores set hora = ? where idJugador = ?";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,nuevaHora);
+            pstmt.setInt(2,idJugador);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

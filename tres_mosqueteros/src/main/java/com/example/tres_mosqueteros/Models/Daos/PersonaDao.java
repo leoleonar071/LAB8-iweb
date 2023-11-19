@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 
 
-import com.example.tres_mosqueteros.Beans.Persona;
+import com.example.tres_mosqueteros.Models.Beans.Granjero;
+import com.example.tres_mosqueteros.Models.Beans.Persona;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class PersonaDao extends DaoBase{
                 "FROM pobladores p\n" +
                 "inner join genero_poblador g on (p.idGenero = g.idGenero)\n" +
                 "left join profesion_poblador prof on (prof.idProfesion = p.idProfesion)\n" +
-                "where idJugador = ?";
+                "where idJugador = ? " +
+                "order by idPoblador";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -39,6 +41,33 @@ public class PersonaDao extends DaoBase{
         }
         return list;
     }
+
+    public void crearPersona(Integer idJugador,String nombre,String idGenero,String idProfesion,Integer alimentacionXdia,Integer produccionMoral,Integer moral,Integer tiempoColonia,Integer fuerza,Integer produccionAlimento){
+
+        String sql = "INSERT INTO pobladores (idJugador, nombre, idGenero, idProfesion, alimentacionXdia, produccion_moral, moral, tiempo_en_colonia, fuerza, produccion_alimento)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try(Connection conn = this.getConection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,idJugador);
+            pstmt.setString(2, nombre);
+            pstmt.setString(3, idGenero);
+            pstmt.setString(4, idProfesion);
+            pstmt.setInt(5,alimentacionXdia);
+            pstmt.setInt(6,produccionMoral);
+            pstmt.setInt(7,moral);
+            pstmt.setInt(8,tiempoColonia);
+            pstmt.setInt(9,fuerza);
+            pstmt.setInt(10, produccionAlimento);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     private void fetchPersonaData(Persona persona, ResultSet rs) throws SQLException{
         persona.setIdPoblador(rs.getInt(1));

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Models.Beans.Jugador" class="com.example.tres_mosqueteros.Models.Beans.Jugador"/>
 
 
 <!doctype html>
@@ -29,6 +29,9 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.4/dist/js/uikit-icons.min.js"></script>
 
     <link rel="icon" type="image/jpg" href="favicon.png" />
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="js/showError.js"></script>
+
 
     <style>
         #imagen-container img {
@@ -43,11 +46,6 @@
         }
     </style>
 
-    <style>
-        #texto-mostrado-url {
-            color: blue; /* Establece el color del texto en azul */
-        }
-    </style>
 
     <title>Home | Semana de Ingeniería 2023</title>
 </head>
@@ -119,7 +117,7 @@
 
 
         <div class="row">
-            <form method="post" action="<%=request.getContextPath()%>" enctype="multipart/form-data">
+            <form id="form" method="post" action="<%=request.getContextPath()%>/menu?action=newPerson">
                 <div class="col-lg-6 col-md-12" style="text-align: left; padding-top: 1.5em">
 
 
@@ -130,8 +128,8 @@
 
                             <div>
                                 <div class="form-group" style="padding-right: 1rem">
-                                    <label  style="text-align: left;"><strong>Título del evento:</strong></label>
-                                    <input name="titulo" type="text" class="form-control"  required>
+                                    <label  style="text-align: left;"><strong>Nombre de la persona:</strong></label>
+                                    <input name="nombre" id="nombrePersona" type="text" class="form-control"  required>
                                 </div>
                             </div>
 
@@ -139,47 +137,16 @@
 
                             <div>
                                 <div class="form-group" style="padding-right: 1rem">
-                                    <label  style="text-align: left;"><strong>Subtítulo del evento:</strong></label>
+                                    <label  style="text-align: left;"><strong>Género: </strong></label>
 
-                                    <div class="row">
+                                        <select class="form-select" name="genero" aria-label="Default select example" required>
+                                            <option selected disabled value="">Seleccionar equipo</option>
+                                            <option value="M">M (masculino)</option>
+                                            <option value="F">F (femenino)</option>
 
-                                        <div class="col-md-4">
-                                            <input  type="text" class="form-control" value="Fibra Tóxica" disabled readonly>
-                                        </div>
+                                        </select>
 
-                                        <div class="col-md-2">
-                                            <h1 style="font-size:26px; text-align: center">vs</h1>
-                                        </div>
-
-
-                                        <div class="col-md-6">
-                                            <select class="form-select" name="subtituloP2" aria-label="Default select example" required>
-                                                <option selected disabled value="">Seleccionar equipo</option>
-                                                <option value=" vs Hormigón Armado">Hormigón Armado</option>
-                                                <option value=" vs Naranja Mecánica">Naranja Mecánica</option>
-                                                <option value=" vs Electroshock">Electroshock</option>
-                                                <option value=" vs Memoria Cache">Memoria Cache</option>
-                                                <option value=" vs Descontrol">Descontrol</option>
-                                                <option value=" vs PXO">PXO</option>
-                                                <option value=" vs Mafia Cuántica">Mafia Cuántica</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-
-                            <div style="padding-top: 1.5em;"></div>
-
-                            <div class="form-group" style="padding-right: 1rem">
-                                <label style="text-align: left;"><strong>Hora del evento:</strong></label>
-                                <input name="hora" type="time" class="form-control"  required>
-                            </div>
-
-                            <div style="padding-top: 1.5em;"></div>
-
-                            <div class="form-group" style="padding-right: 1rem">
-                                <label  style="text-align: left;"><strong>Fecha del evento:</strong></label>
-                                <input name="fecha" type="date" class="form-control"  required>
                             </div>
 
                             <div style="padding-top: 1.5em;"></div>
@@ -194,25 +161,16 @@
 
                             </select>
                             <div id="imagen-container">
-                                <img id="imagen1" src="https://th.bing.com/th/id/OIG.4yvtJarKEiznGuLgyXvL?pid=ImgGn" alt="Imagen 1">
-                                <img id="imagen2" src="https://th.bing.com/th/id/OIG.IElTutWh8V5DqQw4zfrp?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Imagen 2">
-                                <img id="imagen3" src="https://th.bing.com/th/id/OIG.jjCi01.YZWQ_f6NgFdmi?pid=ImgGn" alt="Imagen 3">
+                                <img id="imagen1" src="https://th.bing.com/th/id/OIG.iOvKX4MmJxI4ZeAz3874?pid=ImgGn" alt="Imagen 1">
+                                <img id="imagen2" src="https://th.bing.com/th/id/OIG.Ii_Gx0xWqZxFeMlvMaD_?pid=ImgGn" alt="Imagen 2">
+                                <img id="imagen3" src="https://th.bing.com/th/id/OIG.DPGU4HHy7zWFDp_jYHZa?pid=ImgGn" alt="Imagen 3">
                                 <img id="imagen4" src="https://th.bing.com/th/id/OIG.zsC6bLxpwnxYsFL97wQO?pid=ImgGn" alt="Imagen 4">
                             </div>
-                            <input type="hidden" name="lugar" id="lugarTexto" value="">
-
-
+                            <input type="hidden" name="idProfesion" id="lugarTexto" value="">
 
 
                             <div style="padding-top: 1.5em;"></div>
 
-                            <div>
-                                <div class="form-group">
-                                    <label style="text-align: left;"><strong>Descripción del evento:</strong></label>
-                                    <textarea class="form-control" name="descripcion" aria-label="With textarea" placeholder="250 palabras máximo." required></textarea>
-                                </div>
-                                <div style="padding-top: 1em;"></div>
-                            </div>
 
 
 
@@ -223,7 +181,7 @@
 
                     <div class="uk-flex uk-flex-center uk-margin-top">
                         <div class="uk-flex uk-flex-center">
-                            <a id="redirect-button" class="btn btn-secondary m-2" href="<%=request.getContextPath()%>/admin_act?action=home">Cancelar</a>
+                            <a id="redirect-button" class="btn btn-secondary m-2" href="<%=request.getContextPath()%>/menu?action=home">Cancelar</a>
                             <button type="submit" class="btn btn-primary m-2">Guardar</button>
                         </div>
                     </div>
@@ -251,9 +209,9 @@
 <div style="margin-bottom: 50px"></div>
 
 
-<footer-form class="footer">
+<footer class="footer-form">
     <p style="color: black; font-weight: bold;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
-</footer-form>
+</footer>
 
 
 
@@ -294,14 +252,54 @@
 </script>
 
 
+<script>
+    const nombre = document.getElementById("nombrePersona")
+    const form = document.getElementById("form")
+
+    form.addEventListener("submit", e=>{
+
+        if (nombre.value.length>10){
+            showError("El nombre de la persona es muy largo. Debe contener como máximo 10 caracteres")
+            e.preventDefault()
+        }
+        else{
+            //Envia el form al servlet
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Felicidades!! Haz añadido una nueva persona a tu civilización",
+                width: 600,
+                padding: "3em",
+                color: "#FFFFFF",
+                confirmButtonText: "Ver civilización",
+                background: "#F0B20E",
+                confirmButtonColor: "#1A1A18",
+                backdrop: `
+                        rgba(0,0,0,0.4)
+                        url("https://i.pinimg.com/originals/28/1c/41/281c41a190e26ee83cd1da35008ac30a.gif")
+                        center top
+                        no-repeat
+                        `
+            }).then(() => {
+                // Redirige al servlet después de cerrar la alerta
+                document.getElementById('form').submit(); // Envía el formulario
+            });
+        }
+    })
+</script>
 
 
-<script src="js/upload.js"></script>
+
+
+
+
+    <script src="js/upload.js"></script>
 <script src="js/bootstrap/bootstrap.js"></script>
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
 
 
 </body-form>
