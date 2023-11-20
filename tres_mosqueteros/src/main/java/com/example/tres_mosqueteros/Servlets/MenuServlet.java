@@ -45,15 +45,21 @@ public class MenuServlet extends HttpServlet {
                 Jugador jugador2 = (Jugador) httpSession3.getAttribute("jugadorLogueado");
                 System.out.println("el id del jugador es: "+ jugador2.getIdJugador());
 
+                if(jugador2 != null){
+                    int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador2.getIdJugador());
+                    request.setAttribute("sumacomida", sumacomida);
+                    int sumafuerza= personaDao.obtener_fuerza_total(jugador2.getIdJugador());
+                    request.setAttribute("sumafuerza", sumafuerza);
+                    ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador2.getIdJugador());
+                    request.setAttribute("lista5bajos", lista5bajos);
 
-                int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador2.getIdJugador());
-                request.setAttribute("sumacomida", sumacomida);
-                int sumafuerza= personaDao.obtener_fuerza_total(jugador2.getIdJugador());
-                request.setAttribute("sumafuerza", sumafuerza);
-                ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador2.getIdJugador());
-                request.setAttribute("lista5bajos", lista5bajos);
+                    request.getRequestDispatcher("/pages/gestion_recursos.jsp").forward(request, response);
+                }else{
+                    response.sendRedirect(request.getContextPath());
+                }
 
-                request.getRequestDispatcher("/pages/gestion_recursos.jsp").forward(request, response);
+
+
 
 
                 break;

@@ -52,7 +52,7 @@
             </li>
 
             <li>
-                <a href="#" style="color:#000000; font-weight: bold;">Gestión de Recursos</a>
+                <a href="<%=request.getContextPath()%>/menu?action=gestionRecursos" style="color:#000000; font-weight: bold;">Gestión de Recursos</a>
             </li>
             <li>
                 <a href="#" style="color:#000000; font-weight: bold;">Guerra</a>

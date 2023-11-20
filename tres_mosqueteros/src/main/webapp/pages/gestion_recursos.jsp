@@ -1,8 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.tres_mosqueteros.Beans.Jugador" %>
-<%@ page import="com.example.tres_mosqueteros.Beans.Persona" %>
+<%@ page import="com.example.tres_mosqueteros.Models.Beans.Jugador" %>
+<%@ page import="com.example.tres_mosqueteros.Models.Beans.Persona" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Beans.Jugador" class="com.example.tres_mosqueteros.Beans.Jugador"/>
+<jsp:useBean id="jugadorLogueado" scope="session" type="com.example.tres_mosqueteros.Models.Beans.Jugador" class="com.example.tres_mosqueteros.Models.Beans.Jugador"/>
 <% ArrayList<Persona> listaPersonas = (ArrayList<Persona>) request.getAttribute("listaPersonas"); %>
 
 <% int sumacomida = (int) request.getAttribute("sumacomida"); %>
@@ -59,7 +59,7 @@
             </li>
 
             <li>
-                <a href="#" style="color:#000000; font-weight: bold;">Gestión de Recursos</a>
+                <a href="<%=request.getContextPath()%>/menu?action=gestionRecursos" style="color:#000000; font-weight: bold;">Gestión de Recursos</a>
             </li>
             <li>
                 <a href="#" style="color:#000000; font-weight: bold;">Guerra</a>
@@ -236,7 +236,10 @@
 
 
 
-
+<footer class="footer">
+    <p style="color: black;">© LOS TRES MOSQUETEROS - Todos los derechos reservados</p>
+    <hr/>
+</footer>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
