@@ -153,7 +153,7 @@ public class JugadorDao extends DaoBase{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+//servlet
         return jugador;
     }
     public void crear(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena, Integer estado){
