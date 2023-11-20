@@ -200,7 +200,7 @@ public class PersonaDao extends DaoBase{
         int sumaTotal = 0;
 
 
-        String sql = "SELECT SUM(alimentacionXdia) AS suma_total " +
+        String sql = "SELECT SUM(produccion_alimento) AS suma_total " +
                 "FROM pobladores " +
                 "WHERE idJugador = ?";
 

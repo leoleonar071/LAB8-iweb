@@ -39,7 +39,7 @@ public class JugadorDao extends DaoBase{
     // primero usar la funcion crear jugador
     public void crearUsuario(String nombre, int edad, String usuario, String email, String passwordStr){
 
-        String sql = "INSERT INTO `l8_iweb`.`jugadores` (`nombre`, `edad`, `usuario`, `email`, `password_hashed`, `estado`,hora) VALUES ( ?, ?, ?, ?, ?,?,?);";
+        String sql = "INSERT INTO jugadores (`nombre`, `edad`, `usuario`, `email`, `password_hashed`, `estado`,hora) VALUES ( ?, ?, ?, ?, ?,?,?);";
 
         String passworHash = SHA256.cipherPassword(passwordStr);
 
@@ -123,8 +123,8 @@ public class JugadorDao extends DaoBase{
         jugador.setPaz(rs.getInt(4));
         jugador.setUsuario(rs.getString(5));
         jugador.setEmail(rs.getString(6));
-        jugador.setEstado(rs.getInt(9));
-        jugador.setHora(rs.getInt(10));
+        jugador.setEstado(rs.getInt(8));
+        jugador.setHora(rs.getInt(9));
     }
 
     public Jugador buscarPorUsuario(String usuario){
@@ -159,9 +159,8 @@ public class JugadorDao extends DaoBase{
     public void crear(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena){
         String Baneado = "0";
         String paz= "0";
-        String password = jugadorContrasena;
         jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
-        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz, hora) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password_hashed, estado, paz, hora) values (?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -170,11 +169,10 @@ public class JugadorDao extends DaoBase{
             pstmt.setInt(2,jugadorEdad);
             pstmt.setString(3,jugadorUsuario);
             pstmt.setString(4,jugadorCorreo);
-            pstmt.setString(5,password);
-            pstmt.setString(6,jugadorContrasena);
-            pstmt.setString(7,Baneado);
-            pstmt.setString(8,paz);
-            pstmt.setInt(9,0);
+            pstmt.setString(5,jugadorContrasena);
+            pstmt.setString(6,Baneado);
+            pstmt.setString(7,paz);
+            pstmt.setInt(8,0);
 
             pstmt.executeUpdate();
 
@@ -187,9 +185,8 @@ public class JugadorDao extends DaoBase{
         //0 No baneado 1 verdadero
         String Baneado = "1";
         String paz= "0";
-        String password = jugadorContrasena;
         jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
-        String sql = "insert into jugadores (nombre, edad, usuario, email, password, password_hashed, estado, paz) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into jugadores (nombre, edad, usuario, email password_hashed, estado, paz) values (?,?,?,?,?,?,?)";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -198,10 +195,10 @@ public class JugadorDao extends DaoBase{
             pstmt.setInt(2,jugadorEdad);
             pstmt.setString(3,jugadorUsuario);
             pstmt.setString(4,jugadorCorreo);
-            pstmt.setString(5,password);
-            pstmt.setString(6,jugadorContrasena);
-            pstmt.setString(7,Baneado);
-            pstmt.setString(8,paz);
+            pstmt.setString(5,jugadorContrasena);
+            pstmt.setString(6,Baneado);
+            pstmt.setString(7,paz);
+            pstmt.setInt(8,0);
 
             pstmt.executeUpdate();
 
