@@ -55,7 +55,7 @@
     <nav class="nav-bar">
         <ul>
             <li>
-                <a href="#" style="color: #000000; font-weight: bold;" class="active">Gestión de Personas</a>
+                <a href="<%=request.getContextPath()%>/menu?action=home" style="color: #000000; font-weight: bold;" class="active">Gestión de Personas</a>
             </li>
 
             <li>
@@ -200,7 +200,6 @@
 <th class="header c3" style="" scope="col"><a><strong>TIEMPO EN COLONIA</strong></a></th>
 <th class="header c5" style="" scope="col">FUERZA</th>
 <th class="header c5" style="" scope="col">PRODUCCION</th>
-<th class="header c5" style="" scope="col">EDITAR</th>
 <td class="header c6 lastcol" style=""></td>
 </tr>
 </thead>
@@ -213,13 +212,25 @@
 <tr>
 <td><a><%=persona.getIdPoblador()%></a></td>
 <td><%=persona.getNombre()%></td>
-<td><%=persona.getGenero()%></td>
+
+    <%
+        String genero = "";
+        switch (persona.getIdGenero()){
+            case "M":
+                genero = "Masculino";
+                break;
+            case "F":
+                genero = "Femenino";
+                break;
+        }
+    %>
+
+<td><%=genero%></td>
 <td><%=persona.getAlimentacionXdia()%></td>
 <td><%=persona.getMoral()%></td>
 <td><a><%=persona.getTiempo_en_colonia()%></a></td>
 <td><%=persona.getFuerza()%></td>
 <td><%=persona.getProduccionAlimento()%></td>
-<td><a href="<%=request.getContextPath()%>/admin_gen?action=editar"><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/edit-row.png" alt="edit-row"/></a></td>
 
 </tr>
 <%}%>

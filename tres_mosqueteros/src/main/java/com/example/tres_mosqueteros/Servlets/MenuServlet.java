@@ -47,12 +47,12 @@ public class MenuServlet extends HttpServlet {
 
                 if(jugador2 != null){
                     int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador2.getIdJugador());
-                    request.setAttribute("sumacomida", sumacomida);
                     int sumafuerza= personaDao.obtener_fuerza_total(jugador2.getIdJugador());
-                    request.setAttribute("sumafuerza", sumafuerza);
                     ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador2.getIdJugador());
-                    request.setAttribute("lista5bajos", lista5bajos);
 
+                    request.setAttribute("sumacomida", sumacomida);
+                    request.setAttribute("sumafuerza", sumafuerza);
+                    request.setAttribute("lista5bajos", lista5bajos);
                     request.getRequestDispatcher("/pages/gestion_recursos.jsp").forward(request, response);
                 }else{
                     response.sendRedirect(request.getContextPath());
