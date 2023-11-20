@@ -156,11 +156,10 @@ public class JugadorDao extends DaoBase{
 
         return jugador;
     }
-    public void crear(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena){
-        String Baneado = "0";
-        String paz= "0";
+    public void crear(String jugadorNombre, int jugadorEdad, String jugadorUsuario, String jugadorCorreo, String jugadorContrasena, Integer estado){
+
         jugadorContrasena = SHA256.cipherPassword(jugadorContrasena);
-        String sql = "insert into jugadores (nombre, edad, usuario, email, password_hashed, estado, paz, hora) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into jugadores (nombre, edad, usuario, email, password_hashed, estado_ban, paz, hora) values (?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -170,8 +169,8 @@ public class JugadorDao extends DaoBase{
             pstmt.setString(3,jugadorUsuario);
             pstmt.setString(4,jugadorCorreo);
             pstmt.setString(5,jugadorContrasena);
-            pstmt.setString(6,Baneado);
-            pstmt.setString(7,paz);
+            pstmt.setInt(6,estado);
+            pstmt.setInt(7,0);
             pstmt.setInt(8,0);
 
             pstmt.executeUpdate();

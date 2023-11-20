@@ -58,43 +58,27 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
             case "registrarse": //Registrar jugador
-                String jugadorNombre = request.getParameter("jugadorNombre");
-                String jugadorEdadStr = request.getParameter("jugadorEdad");
-                String jugadorUsuarioStr = request.getParameter("jugadorUsuario");
-                String jugadorCorreoStr = request.getParameter("jugadorCorreo");
-                String jugadorPasswordStr = request.getParameter("jugadorPassword");
+                String newNombre = request.getParameter("jugadorNombre");
+                Integer newEdad = Integer.parseInt(request.getParameter("jugadorEdad"));
+                String newUsuario = request.getParameter("jugadorUsuario");
+                String newCorreo = request.getParameter("jugadorCorreo");
+                String newPassword = request.getParameter("jugadorPassword");
 
-                System.out.println("Edad ingresada" + jugadorEdadStr);
+                System.out.println(newNombre);
+                System.out.println(newEdad);
+                System.out.println(newUsuario);
+                System.out.println(newCorreo);
+                System.out.println(newPassword);
 
-                boolean isAllValid = true;
-                if(Integer.parseInt(jugadorEdadStr) < 13){
-                    isAllValid = false;
-                    System.out.println("Entro el numero");
-                }
 
-                if(isAllValid){
-                    if (jdao.buscarPorCorreo(jugadorCorreoStr)){
-                        Jugador jugador = jdao.buscarPorUsuario(jugadorUsuarioStr); //Busca si hay alguien con el mismo usuario
-
-                        //Creamos Trabajador
-                        if(jugador == null){  //Se verifica que no se repita el primary key
-                            jdao.crear(jugadorNombre,Integer.parseInt(jugadorEdadStr),jugadorUsuarioStr,jugadorCorreoStr,jugadorPasswordStr);
-                            response.sendRedirect(request.getContextPath() + "/login"); //Una vez creado y dado click a submit se devuelve a la página donde está la lista
-                        }else{
-                            request.setAttribute("error_usuario","Error: El nombre de usuario ya existe");
-                            request.getRequestDispatcher("pages/register.jsp").forward(request,response);
-                        }
-                    }else {
-                        request.setAttribute("error_edad","No cumple con el requerimiento de edad");
-                        request.getRequestDispatcher("pages/register.jsp.jsp").forward(request, response);
-                    }
+                if (newEdad > 13){
+                    jdao.crear(newNombre,newEdad,newUsuario,newCorreo,newPassword,0);
+                    response.sendRedirect(request.getContextPath());
                 }else{
-
-                    jdao.jugadorAgregadoListaNegra(jugadorNombre,Integer.parseInt(jugadorEdadStr),jugadorUsuarioStr,jugadorCorreoStr,jugadorPasswordStr);
-                    request.setAttribute("error_edad","No cumple con el requerimiento de edad");
-                    request.getRequestDispatcher("pages/register.jsp").forward(request,response);
-
+                    jdao.crear(newNombre,newEdad,newUsuario,newCorreo,newPassword,1);
+                    response.sendRedirect(request.getContextPath());
                 }
+
                 break;
         }
 
