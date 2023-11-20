@@ -171,14 +171,10 @@ public class MenuServlet extends HttpServlet {
                 break;
 
             case "editPerson":
-
                 String idPersona = request.getParameter("idPersona");
                 String nuevoNombre = request.getParameter("nombreEditado");
-
-                System.out.println(idPersona);
-                System.out.println(nuevoNombre);
-
-
+                personaDao.actualizarNombrePersona(idPersona, nuevoNombre);
+                response.sendRedirect(request.getContextPath()+"/menu?action=home");
                 break;
 
         }

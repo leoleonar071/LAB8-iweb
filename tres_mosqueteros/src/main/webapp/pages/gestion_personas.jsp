@@ -98,6 +98,7 @@
                 <th class="header c5" style="" scope="col">FUERZA</th>
                 <th class="header c5" style="" scope="col">PRODUCCION</th>
                 <th class="header c5" style="" scope="col">EDITAR</th>
+                <th class="header c5" style="" scope="col">ELIMINAR</th>
                 <td class="header c6 lastcol" style=""></td>
             </tr>
         </thead>
@@ -117,6 +118,8 @@
                 <td><%=persona.getFuerza()%></td>
                 <td><%=persona.getProduccionAlimento()%></td>
                 <td><a href="<%=request.getContextPath()%>/menu?action=editarPersona&idPersona=<%=persona.getIdPoblador()%>"><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/edit-row.png" alt="edit-row"/></a></td>
+                <td class="cell c6 "><a  href="#" disabled=""><img width="24" height="24" src="https://img.icons8.com/sf-regular/48/filled-trash.png" alt="filled-trash"/></a></td>
+
 
             </tr>
         <%}%>

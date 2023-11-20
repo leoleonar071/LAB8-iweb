@@ -176,6 +176,23 @@ public class PersonaDao extends DaoBase{
         }
     }
 
+    public void actualizarNombrePersona(String idPersona, String nuevoNombre) {
+
+
+        String sqlUpdate = "UPDATE pobladores SET nombre=? WHERE idPoblador = ?";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
+
+            pstmt.setString(1, nuevoNombre);
+            pstmt.setString(2, idPersona);
+
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 
 
