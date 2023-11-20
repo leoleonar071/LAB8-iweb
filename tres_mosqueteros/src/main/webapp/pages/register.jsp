@@ -10,6 +10,7 @@
 
     <script src="https://kit.fontawesome.com/a2dd6045c4.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/jpg" href="favicon.png"/>
+    <script> src="js/.showError.js"</script>
     <title>Semana de Ingeniería 2023</title>
 </head>
 
@@ -22,7 +23,7 @@
 
         <div class="register-form">
 
-            <form action="<%=request.getContextPath()%>/login?action=registrarse" method="POST" id="register-formulario" onsubmit="return validateForm()">
+            <form action="<%=request.getContextPath()%>/login?action=registrarse" method="POST" id="form" >
                 <h2>Registrarse</h2>
                 <% if (request.getAttribute("error_edad") != null) {%>
                 <div class="alert alert-danger" role="alert"><%=request.getAttribute("error_edad")%>
@@ -44,14 +45,6 @@
                     <input type="text" id="jugadorCorreo" name="jugadorCorreo" required>
                     <label for="jugadorCorreo">correo</label>
                 </div>
-                <!--<div class="register-input">
-                    <input type="text email" id="email" name="email" required>
-                    <label for="email">Correo PUCP <t class="t-light">(codigo@pucp.edu.pe)</t></label>
-                </div>-->
-                <!--<div class="register-checkbox">
-                    <input type="checkbox" id="condition" name="condition" value="condit">
-                    <label for="condition">Soy egresado PUCP</label>
-                </div>-->
                 <div class="register-input">
                     <input type="text" id="jugadorUsuario" name="jugadorUsuario" required>
                     <label for="jugadorUsuario">Usuario</label>
@@ -82,6 +75,7 @@
 
 </section>
 
+
 <script>
     function validateForm() {
         var password = document.getElementById("jugadorPassword").value;
@@ -89,19 +83,7 @@
         var tieneMayuscula = /[A-Z]/.test("jugadorPassword");
         var tieneNumero = /[0-9]/.test("jugadorPassword");
         var tieneCaracterEspecial = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test("jugadorPassword");
-        //var email = document.getElementById("email").value;
-        //var code = document.getElementById("code").value;
-        // Validar formato de correo electrónico
-        //var emailRegex = /^[A-Za-z0-9._%+-]+@pucp\.edu\.pe$/;
-        //if (!emailRegex.test(email)) {
-        //alert("Ingrese un correo electrónico válido de PUCP (ejemplo@pucp.edu.pe).");
-        //return false;
-        //}
-        // Validar que el código PUCP tenga como máximo 8 números
-        //if (!(/^\d{8}$/.test(password))) {
-        //alert("Ingrese un código PUCP válido de 8 dígitos.");
-        //return false;
-        //}
+
         // Validar coincidencia de contraseñas
         if (password !== passwordconf) {
             alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
@@ -115,6 +97,29 @@
         }
         return true;
     }
+</script>
+
+
+<script>
+    const nombre = document.getElementById("jugadorNombre")
+    const form = document.getElementById("form")
+
+    form.addEventListener("submit", e=>{
+
+        if (!isNaN(nombre.value.charAt(0))){
+            showError('EL nombre no puede iniciar con un numero')
+            e.preventDefault() // Evita el envío del formulario si la validación falla
+        }else if (nombre.value.length<4){
+            showError("El titulo de la actividad es muy corto")
+            e.preventDefault()
+        }else if (nombre.value.length>8){
+            showError("El titulo de la actividad es muy largo")
+            e.preventDefault()
+        }
+        else{
+            //Envia el form al servlet
+        }
+    })
 </script>
 
 </body>

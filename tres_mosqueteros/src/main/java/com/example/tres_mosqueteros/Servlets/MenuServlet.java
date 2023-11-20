@@ -46,12 +46,13 @@ public class MenuServlet extends HttpServlet {
                 System.out.println("el id del jugador es: "+ jugador2.getIdJugador());
 
                 if(jugador2 != null){
-                    int sumacomida= personaDao.obtener_produccion_total_alimentosxDia(jugador2.getIdJugador());
+                    int sumacomida= personaDao.obtener_produccion_total_alimentos(jugador2.getIdJugador());
                     int sumafuerza= personaDao.obtener_fuerza_total(jugador2.getIdJugador());
+                    int alimentacionPorDiaTotal = personaDao.alimentacionTotalXdia(jugador2.getIdJugador());
                     ArrayList<Persona> lista5bajos = personaDao.listar_5pobladores_baja_moral(jugador2.getIdJugador());
 
                     request.setAttribute("sumacomida", sumacomida);
-                    request.setAttribute("sumafuerza", sumafuerza);
+                    request.setAttribute("sumaAlimentacion", alimentacionPorDiaTotal);
                     request.setAttribute("lista5bajos", lista5bajos);
                     request.getRequestDispatcher("/pages/gestion_recursos.jsp").forward(request, response);
                 }else{

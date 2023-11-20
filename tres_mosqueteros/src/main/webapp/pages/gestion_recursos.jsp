@@ -6,7 +6,7 @@
 <% ArrayList<Persona> listaPersonas = (ArrayList<Persona>) request.getAttribute("listaPersonas"); %>
 
 <% int sumacomida = (int) request.getAttribute("sumacomida"); %>
-<% int sumafuerza = (int) request.getAttribute("sumafuerza"); %>
+<% int sumaAlimentacion = (int) request.getAttribute("sumaAlimentacion"); %>
 <% ArrayList<Persona> lista5bajos = (ArrayList<Persona>) request.getAttribute("lista5bajos"); %>
 
 
@@ -92,37 +92,15 @@
 <div style="padding-top: 40px;"></div>
 
 
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-12 text-center">
-
-            <button type="submit" id="verEstadisticas" class="btn btn-primary">Estadisticas del día</button>
-        </div>
-        <br>
-
-
-
-
-
-
-    </div>
-</div>
 
 <div class="container">
     <div class="row">
 
         <div class="col-md-10">
 
-
-
-
-
             <form method="post" action="<%=request.getContextPath()%>/admin_gen?action=home&ac=pasar_horas">
 
-
                 <button type="submit" class="btn btn-primary">Pasar horas</button>
-
 
             </form>
         </div>
@@ -180,7 +158,7 @@
             <p class="lead">La comida del reino es: <%= sumacomida %></p>
         </div>
         <div class="col-sm-6">
-            <p class="lead">La fuerza del reino es: <%= sumafuerza %></p>
+            <p class="lead">Alimento consumido por el reino: <%= sumaAlimentacion %></p>
         </div>
     </div>
 </div>

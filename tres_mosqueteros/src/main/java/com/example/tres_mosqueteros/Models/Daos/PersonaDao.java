@@ -196,7 +196,7 @@ public class PersonaDao extends DaoBase{
 
 
 
-    public int obtener_produccion_total_alimentosxDia(int idJugador ){
+    public int obtener_produccion_total_alimentos(int idJugador ){
         int sumaTotal = 0;
 
 
@@ -214,6 +214,30 @@ public class PersonaDao extends DaoBase{
                     sumaTotal = rs.getInt("suma_total");
                     // Actualizar el atributo sumacomida del jugador
                     actualizar_SumaComidaJugador(idJugador, sumaTotal);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sumaTotal;
+    }
+
+    public int alimentacionTotalXdia(int idJugador){
+        int sumaTotal = 0;
+
+
+        String sql = "SELECT SUM(alimentacionXdia) AS suma_total " +
+                "FROM pobladores " +
+                "WHERE idJugador = ?";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idJugador);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    sumaTotal = rs.getInt("suma_total");
                 }
             }
         } catch (SQLException ex) {
@@ -247,7 +271,7 @@ public class PersonaDao extends DaoBase{
         ArrayList<Persona> pobladores_no_alimentados= new ArrayList<>();
         pobladores_no_alimentados= listarPersonas(idJugador);
 
-        int produccionTotal = obtener_produccion_total_alimentosxDia(idJugador);
+        int produccionTotal = obtener_produccion_total_alimentos(idJugador);
         int consumoDiario=0;
         Persona persona=new Persona();
 
