@@ -168,6 +168,15 @@ public class MenuServlet extends HttpServlet {
                         break;
 
                 }
+                break;
+
+            case "editPerson":
+
+                String idPersona = request.getParameter("idPersona");
+                String nuevoNombre = request.getParameter("nombreEditado");
+
+                System.out.println(idPersona);
+                System.out.println(nuevoNombre);
 
 
                 break;

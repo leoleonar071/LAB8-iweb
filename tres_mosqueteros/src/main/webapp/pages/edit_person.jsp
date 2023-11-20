@@ -42,13 +42,6 @@
     </style>
 
 
-    <style>
-        #iframe-container iframe {
-            display: none;
-        }
-    </style>
-
-
     <title>Home | Semana de Ingeniería 2023</title>
 </head>
 
@@ -119,7 +112,7 @@
 
 
             <div class="row">
-                <form id="form" method="post" action="<%=request.getContextPath()%>/menu?action=editPerson">
+                <form id="form" method="post" action="<%=request.getContextPath()%>/menu?action=editPerson&idPersona=<%=persona.getIdPoblador()%>">
                     <div class="col-lg-6 col-md-12" style="text-align: left; padding-top: 1.5em">
 
 
@@ -131,7 +124,7 @@
                                 <div>
                                     <div class="form-group" style="padding-right: 1rem">
                                         <label  style="text-align: left;"><strong>Nombre de la persona:</strong></label>
-                                        <input class="form-control"  type="text" value="<%=persona.getNombre()%>" id="name"  aria-label="Disabled input example" disabled="" readonly="">
+                                        <input class="form-control"  type="text" value="<%=persona.getNombre()%>" id="nombrePersona" name="nombreEditado" >
                                     </div>
                                 </div>
 
@@ -141,12 +134,20 @@
                                     <div class="form-group" style="padding-right: 1rem">
                                         <label  style="text-align: left;"><strong>Género: </strong></label>
 
-                                        <select class="form-select" name="genero" aria-label="Default select example" required>
-                                            <option disabled value="">Seleccionar equipo</option>
-                                            <option value="M"  <%=persona.getIdGenero()=="M"? "selected": ""%>  >M (masculino)</option>
-                                            <option value="F" <%=persona.getIdGenero()=="F"? "selected": ""%>>F (femenino)</option>
+                                        <%
+                                            String genero = "";
+                                            switch (persona.getIdGenero()){
+                                                case "M":
+                                                    genero = " (Masculino)";
+                                                    break;
+                                                case "F":
+                                                    genero = " (Femenino)";
+                                                    break;
+                                            }
+                                        %>
 
-                                        </select>
+                                        <input class="form-control"  type="text" value="<%=persona.getIdGenero() + genero%>"   aria-label="Disabled input example" disabled="" readonly="">
+
 
                                     </div>
                                 </div>
@@ -154,12 +155,12 @@
                                 <div style="padding-top: 1.5em;"></div>
 
                                 <label style="text-align: left;"><strong>Lugar:</strong></label>
-                                <select class="form-select" id="eleccion" aria-label="Default select example" required>
+                                <select class="form-select" id="eleccion" aria-label="Default select example" disabled>
                                     <option selected disabled value>Selecciona una opción</option>
-                                    <option value="1">Granjero</option>
-                                    <option value="2">Constructor</option>
-                                    <option value="3">Soldado</option>
-                                    <option value="4">Sin oficio</option>
+                                    <option value="1" <%=persona.getIdProfesion().equals("GRA")? "selected" : ""%>>Granjero</option>
+                                    <option value="2" <%=persona.getIdProfesion().equals("CONS")? "selected" : ""%>>Constructor</option>
+                                    <option value="3" <%=persona.getIdProfesion().equals("SOL")? "selected" : ""%>>Soldado</option>
+                                    <option value="4" <%=persona.getIdProfesion().equals("UNSET")? "selected" : ""%>>Sin oficio</option>
 
                                 </select>
                                 <div id="imagen-container">
@@ -225,9 +226,7 @@
 
 
         // Escucha el evento de cambio en el select
-        selectElement.addEventListener("change", function () {
-
-            const selectedValue = selectElement.value;
+        function actualizarInfoSeleccionada(selectedValue) {
 
             // Oculta todas las imágenes
             imagenContainer.querySelectorAll("img").forEach(img => {
@@ -248,9 +247,19 @@
                 lugarTextoInput.value = "UNSET";
             } else {
                 textoMostrado.textContent = ""; // Limpia el texto si no se selecciona una opción válida
-                urlDireccion.textContent = "";
                 lugarTextoInput.value = "";
             }
+        }
+
+        selectElement.addEventListener("change", function () {
+            const selectedValue = selectElement.value;
+            actualizarInfoSeleccionada(selectedValue);
+        });
+
+        // Al cargar la página, obtén la opción seleccionada y muestra la información correspondiente
+        window.addEventListener("load", function () {
+            const selectedValue = selectElement.value;
+            actualizarInfoSeleccionada(selectedValue);
         });
     </script>
 
@@ -270,22 +279,20 @@
                 event.preventDefault();
 
                 Swal.fire({
-                    title: "Felicidades!! Haz añadido una nueva persona a tu civilización",
-                    width: 600,
-                    padding: "3em",
-                    color: "#FFFFFF",
-                    confirmButtonText: "Ver civilización",
-                    background: "#F0B20E",
-                    confirmButtonColor: "#1A1A18",
-                    backdrop: `
-                        rgba(0,0,0,0.4)
-                        url("https://i.pinimg.com/originals/28/1c/41/281c41a190e26ee83cd1da35008ac30a.gif")
-                        center top
-                        no-repeat
-                        `
-                }).then(() => {
+                    iconColor: '#DC3545',
+                    title: "¿Estas seguro de editar el nombre de está persona?",
+                    color: "#000000",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#F0B20E",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Guardar cambios"
+                }).then((result) => {
                     // Redirige al servlet después de cerrar la alerta
-                    document.getElementById('form').submit(); // Envía el formulario
+                    if (result.isConfirmed){
+                        document.getElementById('form').submit(); // Envía el formulario
+                    }
+
                 });
             }
         })
